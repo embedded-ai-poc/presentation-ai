@@ -419,11 +419,11 @@
 
 <div class="slides" id="slides">
 
-    <!-- ==================== PART 1: 마인드셋 ==================== -->
+    <!-- ==================== PART 1: 마인드셋 (index.html 전체) ==================== -->
 
     <!-- 01. Cover -->
     <div class="slide blue">
-        <p class="part-divider">Part 1</p>
+        <p class="part-divider">Part 1 · 마인드셋</p>
         <h1>AI 페어프로그래밍</h1>
         <p class="sub">AI 시대, 개발자의 새로운 역할</p>
         <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
@@ -499,33 +499,72 @@
         <p class="sub">한 번의 주고받기가 아니라<br>AI가 알아서 수행하고 보고</p>
     </div>
 
-    <!-- 09. Outsource -->
+    <!-- 09. Agent Example -->
+    <div class="slide surface">
+        <h3>Agent 시대의 업무 방식</h3>
+        <div class="code">나: "로그 파싱 모듈 리팩토링해줘.
+    기존 테스트 유지하고, 새 기능 테스트도 추가해."
+
+AI: 파일 분석 중...
+    → 기존 테스트 확인
+    → 리팩토링 진행
+    → 새 테스트 작성
+    → 전체 테스트 실행 (32/32 pass)
+    → 결과 보고
+
+나: (diff 검토 후 승인)</div>
+        <p class="sub" style="margin-top: 24px;">내가 코드 한 줄 안 쳐도 작업이 완료됨</p>
+    </div>
+
+    <!-- 10. Outsource -->
     <div class="slide">
         <h1><span class="em">고민</span>을<br>아웃소싱하세요</h1>
         <p class="sub">"이 문제 어떻게 풀지?" 혼자 고민 ✗<br>"같이 생각해보자" AI에게 던지기 ✓</p>
     </div>
 
-    <!-- 10. Master Chef -->
+    <!-- 11. Master Chef -->
     <div class="slide light">
         <h1 style="color: #0A0A0F;">마스터셰프가 되어라</h1>
         <img src="master-chef.png" alt="마스터셰프" style="max-width: 480px; border-radius: 8px; margin: 32px 0;">
         <p class="sub">직접 모든 요리를 하지 않는다 · 각 스테이션을 <strong>지휘</strong>한다<br>품질을 <strong>책임</strong>진다 · <strong class="em">마지막 터치는 직접</strong></p>
     </div>
 
-    <!-- 11. Vibe Coding -->
+    <!-- 12. Definition of Work -->
+    <div class="slide surface">
+        <h2>"일"의 정의가 바뀐다</h2>
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">예전</p>
+                <p>문제 → 직접 해결</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">지금</p>
+                <p>찾기 + 전달 + 검증</p>
+            </div>
+        </div>
+        <p class="sub">코드 치는 시간 ↓<br>문제 정의 + 검증 시간 ↑</p>
+    </div>
+
+    <!-- 13. Vibe Coding -->
     <div class="slide mint">
         <h2>Vibe Coding</h2>
         <img src="vibe-coding.png" alt="Vibe Coding" style="max-width: 480px; margin: 32px 0; border-radius: 8px;">
         <p class="sub">Andrej Karpathy (2025.02)<br>"코드가 존재한다는 것 자체를 잊어버리는 코딩"</p>
     </div>
 
-    <!-- 12. Tool Learning -->
-    <div class="slide surface">
-        <h1>Tool 사용법도 중요하지만<br>또 그렇게 중요하진 않습니다</h1>
-        <p class="sub">원리를 이해하면 모든 도구가 같은 형식임을 알 수 있고<br>더 좋은 도구가 계속 나오기 때문에<br><strong>매번 새로 학습한다는 마인드</strong>가 필요합니다</p>
+    <!-- 14. Vibe Coding Now -->
+    <div class="slide">
+        <h2>"바이브코딩"이라는 말이<br>사라지고 있다</h2>
+        <p class="sub" style="font-size: 1.4rem; margin-top: 48px;">왜냐하면 이젠<br>코딩이 그냥 <span class="em">바이브코딩</span>이니까</p>
     </div>
 
-    <!-- 13. Formula -->
+    <!-- 15. Don't Learn Tools -->
+    <div class="slide surface">
+        <h1>Tool 사용법도 중요하지만<br>또 그렇게 중요하진 않습니다</h1>
+        <p class="sub">원리를 이해하면 모든 도구가 같은 형식임을 알 수 있고<br>더 좋은 도구가 계속 나오기 때문에<br><strong>매번 새로 학습한다는 마인드</strong>가 필요합니다<br><br><span style="font-size: 0.9rem; opacity: 0.7;">Antigravity 출시 이후 Cursor도 오늘내일...</span></p>
+    </div>
+
+    <!-- 16. Formula -->
     <div class="slide blue">
         <p class="formula" style="font-size: clamp(1.6rem, 4vw, 2.5rem); font-weight: 700;">
             <span class="em">Model</span> × <span style="opacity:0.6">Harness</span> × <span class="em">Pilot</span>
@@ -533,7 +572,7 @@
         <p class="sub">AI 페어프로그래밍의 세 가지 요소</p>
     </div>
 
-    <!-- 14. Model -->
+    <!-- 17. Model -->
     <div class="slide">
         <h2>Model</h2>
         <p class="sub">어떤 LLM을 사용하느냐</p>
@@ -546,14 +585,14 @@
         <p class="sub" style="font-size: 0.95rem;">순위에 집착 ✗ · 어차피 매주 바뀜</p>
     </div>
 
-    <!-- 15. Harness -->
+    <!-- 18. Harness -->
     <div class="slide surface">
         <h2>Agentic Harness</h2>
         <p class="sub">Model을 둘러싼 도구와 환경</p>
         <div class="grid">
             <div class="grid-item">
                 <p class="name em">Agent</p>
-                <p class="desc">Cursor, Claude Code</p>
+                <p class="desc">Cursor, Claude Code, Cline</p>
             </div>
             <div class="grid-item">
                 <p class="name">Tools</p>
@@ -566,13 +605,42 @@
         </div>
     </div>
 
-    <!-- 16. Pilot -->
+    <!-- 19. Harness Light -->
+    <div class="slide">
+        <h2>Harness는 가볍게</h2>
+        <div class="warn">
+            <p>MCP 좋다고 이것저것 등록하면<br>오히려 AI가 헤맵니다</p>
+        </div>
+        <p class="sub">Tool이 적을수록 Model이 집중<br>Model이 똑똑해질수록 Harness는 가벼워져야 함</p>
+    </div>
+
+    <!-- 20. Useful MCPs -->
+    <div class="slide surface">
+        <h3>그래도 유용한 MCP들</h3>
+        <div class="grid">
+            <div class="grid-item">
+                <p class="name em">Context7</p>
+                <p class="desc">라이브러리 문서 자동 참조</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Serena</p>
+                <p class="desc">코드베이스 분석/탐색</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Magic</p>
+                <p class="desc">UI 컴포넌트 생성</p>
+            </div>
+        </div>
+        <p class="sub" style="font-size: 0.95rem;">전부 다 쓰지 말고, 용도에 맞게 선택적으로</p>
+    </div>
+
+    <!-- 21. Pilot -->
     <div class="slide violet">
         <h1><span class="em">Pilot</span></h1>
         <p class="sub">가장 중요한 요소 = 당신</p>
     </div>
 
-    <!-- 17. Pilot Skills -->
+    <!-- 22. Pilot Skills -->
     <div class="slide surface">
         <h3>Pilot의 핵심 역량</h3>
         <ul class="list">
@@ -583,20 +651,127 @@
         </ul>
     </div>
 
-    <!-- 18. Context Engineering -->
+    <!-- 23. Problem Decomposition -->
+    <div class="slide">
+        <h2>문제 분해 예시</h2>
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">Bad</p>
+                <p style="font-size:1rem">"이커머스 사이트<br>만들어줘"</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">Good</p>
+                <p style="font-size:0.95rem">1단계: 상품 목록<br>2단계: 상세 페이지<br>3단계: 장바구니<br>각 단계 검증 후 진행</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 24. Pipeline -->
+    <div class="slide surface">
+        <h2>파이프라인을 구축하자</h2>
+        <div class="pipeline">
+            <div class="pipeline-step">요구사항 분석</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">PRD 작성</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">TDD 개발</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">코드 리뷰</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step on">검증</div>
+        </div>
+        <p class="sub">각 단계에 AI 역할을 부여</p>
+    </div>
+
+    <!-- 25. Role Assignment -->
+    <div class="slide">
+        <h3>AI에게 역할 부여하기</h3>
+        <div class="code" style="font-size: 0.85rem;">"너는 시니어 요구사항 분석가야. 스펙의 핵심을 정리해줘."
+
+"너는 PRD 작성 전문가야. 요구사항 기반으로 문서 작성해줘."
+
+"너는 TDD의 달인이야. 테스트 먼저 작성하고 구현해줘."
+
+"너는 코드리뷰의 화신이야. MISRA C 기준으로 검토해줘."</div>
+        <p class="sub" style="font-size: 0.95rem;">같은 AI도 역할에 따라 다른 관점으로 작업</p>
+    </div>
+
+    <!-- 26. Context Engineering -->
     <div class="slide violet">
         <h1>Context<br>Engineering</h1>
         <p class="sub">같은 AI, 같은 요청이라도<br><span class="em">맥락</span>에 따라 결과가 완전히 다름</p>
     </div>
 
-    <!-- 19. AI Slop -->
+    <!-- 27. Context Example -->
+    <div class="slide surface">
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">맥락 없이</p>
+                <p style="font-size:0.95rem">"페이지 매핑 테이블<br>구조체 만들어줘"</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">맥락 제공</p>
+                <p style="font-size:0.9rem">"HIL 모듈용, 4KB 페이지,<br>2TB 지원, MISRA C 2012,<br>ftl_types.h 호환"</p>
+            </div>
+        </div>
+        <p class="sub">이 맥락을 CLAUDE.md에 정리해두면 됨</p>
+    </div>
+
+    <!-- 28. Three Elements -->
+    <div class="slide">
+        <h2>세 가지가 맞으면</h2>
+        <p class="sub">Model이 좋아지든, Harness가 발전하든<br><br><strong class="em">여러분에게는 생산성 향상밖에<br>일어나지 않습니다</strong></p>
+    </div>
+
+    <!-- 29. 실전 Title -->
+    <div class="slide orange">
+        <h1>실전</h1>
+        <p class="sub">파이프라인을 어떻게 구축할 것인가</p>
+    </div>
+
+    <!-- 30. TDD -->
+    <div class="slide surface">
+        <h2>실전: TDD</h2>
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">인간</p>
+                <p>"나중에 테스트..."</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">AI</p>
+                <p>귀찮다는 개념 없음<br>정교하게, 일관되게</p>
+            </div>
+        </div>
+        <p class="sub">TDD는 AI에게 시키기 최적의 작업</p>
+    </div>
+
+    <!-- 31. Multi Process -->
+    <div class="slide surface">
+        <h2>실전: 멀티 프로세스</h2>
+        <p class="sub" style="max-width: 550px;">
+            여유가 생겼다면 <strong class="em">병렬로 돌리세요</strong>
+        </p>
+        <p class="sub" style="margin-top: 32px; font-size: 1rem; opacity: 0.8;">
+            <span class="em">게임 오토모드</span> 돌리듯<br>
+            AI 수행시키고 유튜브 보다가 결과만 확인
+        </p>
+    </div>
+
+    <!-- 32. Observation -->
+    <div class="slide">
+        <h2>실전: 관찰하기</h2>
+        <img src="thinking-developer.png" alt="관찰하는 개발자" style="max-width: 360px; margin: 32px 0;">
+        <p class="sub">AI 작업 중 (2-3분) 관찰하면서 질문하기<br>"왜 이 파일을 먼저?" "왜 여기서 막혔지?"</p>
+    </div>
+
+    <!-- 33. AI Slop -->
     <div class="slide surface">
         <h2>⚠️ AI Slop 주의</h2>
         <img src="ai-slop.png" alt="AI Slop" style="max-width: 500px; margin: 40px 0;">
         <p class="sub">AI 생성 코드를 <span class="red">검증 없이</span> 그대로 쓰는 것</p>
     </div>
 
-    <!-- 20. Vibe Coding Trap -->
+    <!-- 34. Vibe Coding Trap -->
     <div class="slide">
         <img src="vibe-coding-trap.png" alt="바이브코딩의 함정" style="max-width: 800px; margin-bottom: 40px;">
         <p class="sub" style="font-size: 1.15rem;">
@@ -606,7 +781,66 @@
         </p>
     </div>
 
-    <!-- 21. Part 1 Summary -->
+    <!-- 35. AI Slop Case -->
+    <div class="slide surface">
+        <h3>실제 사례 (2025.05)</h3>
+        <p class="sub" style="font-size: 1.25rem; color: #F0F0F5;">Lovable에서 생성된 1,645개 웹앱 중<br><span class="red">170개에서 개인정보 유출 취약점</span> 발견</p>
+        <p class="sub" style="margin-top: 48px;"><strong class="em">마지막 터치는 여러분이 해야 합니다</strong></p>
+    </div>
+
+    <!-- 36. Code is Liability -->
+    <div class="slide">
+        <h1>코드는 <span class="red">부채</span>다</h1>
+        <p class="sub">자산이 아닙니다<br>유지보수 부담, 버그, 기술 부채<br><br>필요한 <strong>최소한의 코드</strong>만 유지</p>
+    </div>
+
+    <!-- 37. AI Makes Docs -->
+    <div class="slide mint">
+        <h1>AI는 코드보다<br><span class="em">문서</span>를 더 잘 만든다</h1>
+        <p class="sub">발표 자료, 기술 문서, 보고서, 스프레드시트<br>"HTML로 멋진 문서 만들어줘" → 기가 막히게</p>
+    </div>
+
+    <!-- 38. NotebookLM -->
+    <div class="slide surface">
+        <h2>Google NotebookLM</h2>
+        <p class="sub" style="margin-top: 0; margin-bottom: 24px; font-size: 1.4rem; color: #F0F0F5;">
+            문서 업로드 → <span class="em">팟캐스트 형식 오디오북</span> 자동 생성
+        </p>
+        <img src="notebooklm-screen.png" alt="NotebookLM" style="max-width: 95vw; width: 1100px; margin: 24px 0; border-radius: 8px; border: 1px solid #252830;">
+        <p class="sub" style="font-size: 1rem;">PPT, 논문, 기술 문서 → 출퇴근길에 듣기</p>
+    </div>
+
+    <!-- 39. Future Title -->
+    <div class="slide">
+        <h1>심화: 미래</h1>
+        <p class="sub">이걸 <span class="em">완전 자동화</span>한다면?</p>
+    </div>
+
+    <!-- 40. Automation Detail -->
+    <div class="slide surface">
+        <h3>완전 자동화 시나리오</h3>
+        <div class="pipeline" style="font-size: 0.8rem;">
+            <div class="pipeline-step">JIRA MCP로<br>이슈 자동 수집</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">스스로 분석<br>& 해결</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">Git Push</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step">빌드 & 테스트</div>
+            <span class="pipeline-arrow">→</span>
+            <div class="pipeline-step on">실패 시<br>처음부터</div>
+        </div>
+        <p class="sub" style="margin-top: 40px;">성공하면 TR까지 자동 생성...</p>
+    </div>
+
+    <!-- 41. 그러면 우리는? -->
+    <div class="slide">
+        <h2>그러면 우리는...?</h2>
+        <img src="confused-developer.png" alt="고민하는 개발자" style="max-width: 520px; margin: 32px 0; border-radius: 8px;">
+        <p class="sub" style="font-size: 1.3rem;">모르겠음..<br><br><span class="em">일단 열심히 하는 수밖에</span></p>
+    </div>
+
+    <!-- 42. Summary Part 1 -->
     <div class="slide surface">
         <h2>Part 1 정리</h2>
         <ul class="list">
@@ -618,16 +852,44 @@
         </ul>
     </div>
 
-    <!-- ==================== PART 2: 도구와 실전 ==================== -->
+    <!-- 43. Final Part 1 -->
+    <div class="slide">
+        <h1>"코딩 잘하는 사람"이<br>아니라</h1>
+    </div>
 
-    <!-- 22. Part 2 Cover -->
+    <!-- 44. Final Part 1 - 2 -->
     <div class="slide blue">
-        <p class="part-divider">Part 2</p>
+        <h1><span class="em">"무엇을 만들어야<br>하는지 아는 사람"</span>이<br>이깁니다</h1>
+    </div>
+
+    <!-- ==================== PART 2: 도구와 실전 (index2.html) ==================== -->
+
+    <!-- 45. Part 2 Cover -->
+    <div class="slide blue">
+        <p class="part-divider">Part 2 · 도구와 실전</p>
         <h1>도구 선택과<br>실전 워크플로우</h1>
         <p class="sub">도구 선택 → 환경 구축 → 워크플로우 실습</p>
     </div>
 
-    <!-- 23. Tool Landscape -->
+    <!-- 46. Goal -->
+    <div class="slide surface">
+        <h2>오늘의 목표</h2>
+        <p class="sub" style="font-size: 1.4rem;">
+            <span class="em">도구 선택</span> → <span class="em">환경 구축</span> → <span class="em">워크플로우 실습</span>
+        </p>
+        <p class="sub" style="margin-top: 48px; font-size: 1rem; opacity: 0.7;">
+            외부망 연결 후 POC를 진행하게 됩니다<br>
+            그 전에 도구와 방법론을 미리 익혀두자
+        </p>
+    </div>
+
+    <!-- 47. Tool Landscape -->
+    <div class="slide">
+        <h2>2025년 12월 기준<br>AI 코딩 도구 지형도</h2>
+        <p class="sub">추천 도구 3가지 + 보조 도구 1가지</p>
+    </div>
+
+    <!-- 48. Three Tools -->
     <div class="slide surface">
         <div class="tool-cards">
             <div class="tool-card recommended">
@@ -653,7 +915,7 @@
         </div>
     </div>
 
-    <!-- 24. My Opinion -->
+    <!-- 49. My Opinion -->
     <div class="slide">
         <h2>개인적인 의견</h2>
         <div class="quote-box">
@@ -663,7 +925,7 @@
         </div>
     </div>
 
-    <!-- 25. Cursor Always Right -->
+    <!-- 50. Cursor Always Right -->
     <div class="slide surface">
         <h2>하지만 Cursor는 항상 옳은 선택</h2>
         <ul class="list">
@@ -672,9 +934,10 @@
             <li><strong>낮은 학습 곡선</strong> — VS Code와 동일한 UI</li>
             <li><strong>합리적 가격</strong> — Pro $20, Pro Plus $60</li>
         </ul>
+        <p class="sub">익숙한 환경에서 시작하고 싶다면 Cursor</p>
     </div>
 
-    <!-- 26. Antigravity Now -->
+    <!-- 51. Antigravity Now -->
     <div class="slide google">
         <h1>Antigravity의 현재</h1>
         <p class="sub">
@@ -685,7 +948,7 @@
         </p>
     </div>
 
-    <!-- 27. Codex CLI -->
+    <!-- 52. Codex CLI -->
     <div class="slide surface">
         <h3>보조 도구: OpenAI Codex CLI</h3>
         <div class="comp">
@@ -701,8 +964,20 @@
         <p class="sub">코드 리뷰, 간단한 작업을<br><span class="em">Sub-Agent</span>처럼 쓸 때 유용</p>
     </div>
 
-    <!-- 28. Prerequisites -->
+    <!-- 53. Summary Table -->
     <div class="slide">
+        <h3>도구 선택 가이드</h3>
+        <table class="tbl">
+            <tr><th>상황</th><th>추천</th></tr>
+            <tr><td>최고 성능, 비용 무관</td><td><strong class="green">Claude Code</strong> (Max $100)</td></tr>
+            <tr><td>안정적, 익숙한 환경</td><td><strong class="em">Cursor</strong> (Pro $20~60)</td></tr>
+            <tr><td>무료로 시작하고 싶다</td><td><strong class="yellow">Antigravity</strong> (무료)</td></tr>
+            <tr><td>보조 도구, 서브 작업</td><td>Codex CLI</td></tr>
+        </table>
+    </div>
+
+    <!-- 54. Prerequisites -->
+    <div class="slide surface">
         <h3>사전 설치 (필수)</h3>
         <table class="tbl">
             <tr><th>도구</th><th>용도</th><th>설치</th></tr>
@@ -712,15 +987,16 @@
             <tr><td><strong>pip</strong></td><td>Python 패키지</td><td>Python에 포함</td></tr>
             <tr><td><strong>Git</strong></td><td>버전 관리</td><td>git-scm.com</td></tr>
         </table>
+        <p class="sub" style="font-size: 0.9rem;">Java는 필요시 설치 (일부 MCP에서 사용)</p>
     </div>
 
-    <!-- 29. Claude Code Section -->
+    <!-- 55. Claude Code Section -->
     <div class="slide mint">
         <h1>Claude Code</h1>
         <p class="sub">SWE-bench <span class="em">80.9%</span> — 역대 최고 기록<br>Opus 4.5 기반, 터미널에서 동작하는 Agent</p>
     </div>
 
-    <!-- 30. Claude Code Pricing -->
+    <!-- 56. Claude Code Pricing -->
     <div class="slide surface">
         <h3>Claude Code 요금제</h3>
         <table class="tbl">
@@ -735,13 +1011,27 @@
         </div>
     </div>
 
-    <!-- 31. CLAUDE.md -->
+    <!-- 57. Claude Code Install -->
+    <div class="slide">
+        <h3>Claude Code 설치</h3>
+        <div class="code"><span class="comment"># Node.js 18+ 필요</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="comment"># 설치 확인</span>
+claude --version
+
+<span class="comment"># 최초 실행 → 브라우저에서 로그인</span>
+claude</div>
+        <p class="sub">Max 요금제 구독 후 로그인하면 바로 사용 가능</p>
+    </div>
+
+    <!-- 58. CLAUDE.md -->
     <div class="slide violet">
         <h1>CLAUDE.md</h1>
         <p class="sub">프로젝트의 <span class="em">맥락</span>을 알려주는 파일<br><br>이것 하나로 AI 출력 품질이 완전히 달라짐</p>
     </div>
 
-    <!-- 32. CLAUDE.md Example -->
+    <!-- 59. CLAUDE.md Example -->
     <div class="slide surface">
         <h3>CLAUDE.md 예시 (SSD FW)</h3>
         <div class="code"><span class="keyword"># Project: SSD FW GC Module</span>
@@ -751,28 +1041,110 @@
 - 함수명: snake_case / 매크로: UPPER_SNAKE_CASE
 - 들여쓰기: 4 spaces (탭 금지)
 
+<span class="keyword">## 빌드 & 테스트</span>
+make -j8 TARGET=release
+make test SUITE=gc_unit
+
 <span class="keyword">## 절대 금지</span>
 - 동적 메모리 할당 (malloc/free) ❌
 - 전역 변수 남용 ❌
+- 주석 없는 복잡한 로직 ❌
 
 <span class="keyword">## 필수</span>
 - 모든 함수에 Doxygen 주석
 - 에러 핸들링 명시적으로</div>
     </div>
 
-    <!-- 33. Workflow Section -->
+    <!-- 60. Cursor Section -->
+    <div class="slide orange">
+        <h1>Cursor</h1>
+        <p class="sub">가장 대중적인 AI IDE<br>VS Code 기반, 낮은 진입장벽</p>
+    </div>
+
+    <!-- 61. Cursor Pricing -->
+    <div class="slide surface">
+        <h3>Cursor 요금제 (2025.12)</h3>
+        <table class="tbl">
+            <tr><th>플랜</th><th>가격</th><th>특징</th></tr>
+            <tr><td>Pro</td><td>$20/월</td><td>기본 사용, 가벼운 작업</td></tr>
+            <tr><td><strong class="em">Pro Plus</strong></td><td><strong>$60/월</strong></td><td>$70 크레딧 + Background Agent</td></tr>
+            <tr><td>Ultra</td><td>$200/월</td><td>20x 사용량, 파워유저</td></tr>
+        </table>
+        <p class="sub" style="font-size: 0.95rem;">Agent 많이 쓰면 <strong>$60~100/월</strong> 수준</p>
+    </div>
+
+    <!-- 62. Cursor Shortcuts -->
+    <div class="slide">
+        <h3>Cursor 핵심 단축키</h3>
+        <div class="grid">
+            <div class="grid-item">
+                <p class="name">Cmd+K</p>
+                <p class="desc">코드 생성/수정</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Cmd+L</p>
+                <p class="desc">채팅 열기</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Cmd+I</p>
+                <p class="desc">Composer<br>(멀티파일)</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">@파일명</p>
+                <p class="desc">컨텍스트 추가</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 63. .cursorrules -->
+    <div class="slide surface">
+        <h3>.cursorrules</h3>
+        <div class="code"><span class="comment"># Cursor용 컨텍스트 파일 (CLAUDE.md와 동일 역할)</span>
+
+You are an expert SSD firmware engineer.
+Follow MISRA C 2012 guidelines strictly.
+Never use dynamic memory allocation.
+Always write unit tests first (TDD approach).
+Use Doxygen-style comments for all functions.
+Respond in Korean when explaining.</div>
+        <p class="sub">CLAUDE.md ≈ .cursorrules (도구만 다름)</p>
+    </div>
+
+    <!-- 64. Antigravity Section -->
+    <div class="slide google">
+        <h1>Antigravity</h1>
+        <p class="sub">Google의 야심작<br>Gemini 3 Pro + 무료 전략</p>
+    </div>
+
+    <!-- 65. Antigravity Features -->
+    <div class="slide surface">
+        <h3>Antigravity 특징</h3>
+        <ul class="list">
+            <li><strong class="yellow">무료</strong> — 현재 Preview 단계, 한도 넉넉</li>
+            <li><strong>Gemini 3 Pro</strong> — 코딩 성능 준수</li>
+            <li><strong>주간 한도제</strong> — 일별이 아닌 주별 리셋</li>
+            <li><strong>작업량 기반</strong> — 요청 수가 아닌 "일한 양"으로 계산</li>
+            <li><strong>Claude, GPT 지원</strong> — 타사 모델도 사용 가능</li>
+        </ul>
+        <div class="tip">
+            <p>💡 무료로 시작하기 좋음, 단 언제 유료화될지 모름</p>
+        </div>
+    </div>
+
+    <!-- 66. Workflow Section -->
     <div class="slide blue">
         <h1>워크플로우<br>파이프라인 구축</h1>
         <p class="sub">도구를 알았으니 이제 <span class="em">어떻게 쓸지</span></p>
     </div>
 
-    <!-- 34. Outsource Thinking -->
+    <!-- 67. Outsource Thinking -->
     <div class="slide">
         <h1><span class="em">생각</span>과 <span class="em">문제</span>를<br>아웃소싱하자</h1>
+        <img src="kakaotalk-screen.png" alt="카카오톡 AI 대화" style="max-width: 400px; margin: 32px 0; border-radius: 8px;">
         <p class="sub">"이 문제 어떻게 풀지?" 혼자 고민 ✗<br>"같이 생각해보자" AI에게 던지기 ✓</p>
     </div>
 
-    <!-- 35. Multi Process -->
+    <!-- 68. Multi Process Detail -->
     <div class="slide surface">
         <h2>여유가 생겼다면</h2>
         <ul class="list">
@@ -786,13 +1158,7 @@
         </p>
     </div>
 
-    <!-- 36. Docs Better Than Code -->
-    <div class="slide mint">
-        <h1>AI는 코드보다<br><span class="em">문서</span>를 더 잘 만든다</h1>
-        <p class="sub">"HTML로 세상 멋진 문서 만들어줘"<br>→ 기가 막히게 잘 만들어줌</p>
-    </div>
-
-    <!-- 37. Practice Docs -->
+    <!-- 68. Practice Docs -->
     <div class="slide surface">
         <h3>문서화 연습해보자</h3>
         <ul class="list">
@@ -804,24 +1170,17 @@
         <p class="sub" style="font-size: 0.95rem;">코드보다 문서 만드는 연습부터 시작하면 진입장벽 낮음</p>
     </div>
 
-    <!-- 38. Pipeline -->
+    <!-- 69. Pipeline Concept -->
     <div class="slide surface">
-        <h2>파이프라인을 구축하자</h2>
-        <div class="pipeline">
-            <div class="pipeline-step">요구사항 분석</div>
-            <span class="pipeline-arrow">→</span>
-            <div class="pipeline-step">PRD 작성</div>
-            <span class="pipeline-arrow">→</span>
-            <div class="pipeline-step">TDD 개발</div>
-            <span class="pipeline-arrow">→</span>
-            <div class="pipeline-step">코드 리뷰</div>
-            <span class="pipeline-arrow">→</span>
-            <div class="pipeline-step on">검증</div>
+        <h3>파이프라인을 구축하자</h3>
+        <div class="quote-box">
+            <p>반복되는 작업 흐름을 <strong>자동화 가능한 단위</strong>로 구조화<br><br>
+            AI에게 각 단계별 <strong>역할</strong>을 부여하고<br>
+            검증 포인트를 명확히 설정</p>
         </div>
-        <p class="sub">각 단계에 AI 역할을 부여</p>
     </div>
 
-    <!-- 39. Role Assignment -->
+    <!-- 70. Role Assignment Detail -->
     <div class="slide">
         <h3>AI에게 역할 부여하기 (예시)</h3>
         <div class="code" style="font-size: 0.8rem;"><span class="string">"너는 요구사항 분석가야"</span>
@@ -832,7 +1191,7 @@
         <p class="sub">이건 예시일 뿐 — <span class="em">직접 만들 필요 없음</span></p>
     </div>
 
-    <!-- 40. Find Best Template -->
+    <!-- 71. Find Best Template -->
     <div class="slide surface">
         <h2>세상에서 가장 좋은<br>템플릿을 찾아서 적용하자</h2>
         <p class="sub" style="margin-top: 40px;">
@@ -842,7 +1201,7 @@
         </p>
     </div>
 
-    <!-- 41. Loopback Workflow -->
+    <!-- 72. Loopback Workflow -->
     <div class="slide">
         <h3>루프백 워크플로우 요청 예시</h3>
         <div class="code" style="font-size: 0.85rem;">"요구사항 분석 → PRD 문서 생성 → TDD 개발
@@ -855,7 +1214,77 @@
         <p class="sub">이렇게 요청하면 AI가 어떻게 동작하는지 확인해보자</p>
     </div>
 
-    <!-- 42. What is RAG -->
+    <!-- 73. Give Tools -->
+    <div class="slide surface">
+        <h3>각 파이프라인에 도구를 쥐어주자</h3>
+        <div class="code" style="font-size: 0.8rem;"><span class="comment"># 요구사항 분석 단계</span>
+"Context7 MCP를 활용해서 라이브러리 문서 참조해"
+"스펙 문서 /docs/spec_v2.md 를 확인해"
+
+<span class="comment"># TDD 개발 단계</span>
+"TDD에 대해서 1분 이상 고민하고 시작해"
+"우리 회사 코드 컨벤션 /docs/coding_rule.md 참조해"
+
+<span class="comment"># 코드 리뷰 단계</span>
+"MISRA C 2012 기준으로 검토해"
+"보안 취약점 위주로 확인해"</div>
+    </div>
+
+    <!-- 74. Claude Code Pipeline -->
+    <div class="slide">
+        <h3>Claude Code 파이프라인 예시</h3>
+        <div class="code"><span class="comment"># 1. 분석 단계</span>
+> 이 모듈 구조 분석하고 개선점 찾아줘
+
+<span class="comment"># 2. TDD 설정</span>
+> wear_leveling 함수 테스트 케이스 먼저 작성해줘
+
+<span class="comment"># 3. 구현</span>
+> 테스트 통과하도록 구현해줘
+
+<span class="comment"># 4. 검증</span>
+> make test 실행하고 결과 보여줘
+
+<span class="comment"># 5. 리뷰 요청</span>
+> MISRA C 기준으로 셀프 리뷰해줘</div>
+    </div>
+
+    <!-- 75. Cursor Pipeline -->
+    <div class="slide surface">
+        <h3>Cursor 파이프라인 예시</h3>
+        <div class="code"><span class="comment"># Composer (Cmd+I)에서</span>
+
+@gc_manager.c @gc_types.h @test_gc.c
+
+이 세 파일 기반으로:
+1. wear_leveling 함수 테스트 케이스 추가
+2. 함수 리팩토링 (가독성 개선)
+3. MISRA C 위반 사항 체크
+4. 빌드 테스트 실행
+
+각 단계 완료 후 확인받고 진행해줘</div>
+        <p class="sub">@로 파일 컨텍스트 추가 → 멀티파일 작업</p>
+    </div>
+
+    <!-- 76. FW Workflow -->
+    <div class="slide mint">
+        <h1>FW 개발용<br>워크플로우</h1>
+        <p class="sub">임베디드/펌웨어 특화 접근법</p>
+    </div>
+
+    <!-- 77. FW Specific -->
+    <div class="slide surface">
+        <h3>FW 개발 시 주의점</h3>
+        <ul class="list">
+            <li><strong>MISRA C</strong> — CLAUDE.md에 명시 필수</li>
+            <li><strong>동적 할당 금지</strong> — malloc/free 사용하지 말라고 명시</li>
+            <li><strong>하드웨어 의존성</strong> — 시뮬레이션 환경 설명 필요</li>
+            <li><strong>빌드 체인</strong> — cross-compiler 정보 제공</li>
+            <li><strong class="em">테스트 우선</strong> — AI가 생성한 코드 반드시 테스트</li>
+        </ul>
+    </div>
+
+    <!-- 78. What is RAG -->
     <div class="slide">
         <h2>RAG가 뭔데?</h2>
         <div class="quote-box" style="margin-top: 40px;">
@@ -870,7 +1299,7 @@
         </p>
     </div>
 
-    <!-- 43. What is MCP -->
+    <!-- 79. What is MCP -->
     <div class="slide surface">
         <h2>MCP가 뭐야?</h2>
         <div class="quote-box" style="margin-top: 40px;">
@@ -888,7 +1317,13 @@
         </div>
     </div>
 
-    <!-- 44. MCP Warning -->
+    <!-- 80. MCP Section -->
+    <div class="slide violet">
+        <h1>MCP</h1>
+        <p class="sub">Model Context Protocol<br>AI에게 외부 도구 연결하기</p>
+    </div>
+
+    <!-- 81. MCP Warning -->
     <div class="slide">
         <h2>MCP 좋다고<br>이것저것 다 등록하면</h2>
         <p class="sub" style="font-size: 1.5rem; margin-top: 48px;">
@@ -900,7 +1335,7 @@
         </p>
     </div>
 
-    <!-- 43. MCP Examples -->
+    <!-- 82. MCP Examples -->
     <div class="slide surface">
         <h3>그래도 유용한 MCP</h3>
         <div class="grid">
@@ -920,13 +1355,13 @@
         <p class="sub" style="font-size: 0.95rem;">전부 다 쓰지 말고, 용도에 맞게 선택적으로</p>
     </div>
 
-    <!-- 44. Practice Section -->
+    <!-- 83. Practice Section -->
     <div class="slide orange">
         <h1>실습</h1>
         <p class="sub">GitHub 오픈소스로 연습하기</p>
     </div>
 
-    <!-- 45. Practice Idea -->
+    <!-- 84. Practice Idea -->
     <div class="slide surface">
         <h3>실습 아이디어</h3>
         <div class="step">
@@ -959,7 +1394,7 @@
         </div>
     </div>
 
-    <!-- 46. Good Practice Repos -->
+    <!-- 85. Good Practice Repos -->
     <div class="slide">
         <h3>연습하기 좋은 저장소</h3>
         <ul class="list">
@@ -971,7 +1406,7 @@
         <p class="sub">작고 구조가 명확한 프로젝트로 시작</p>
     </div>
 
-    <!-- 47. Security -->
+    <!-- 86. Security -->
     <div class="slide surface">
         <h2>보안 주의사항</h2>
         <ul class="list">
@@ -982,41 +1417,58 @@
         </ul>
     </div>
 
-    <!-- 48. Summary -->
+    <!-- 87. Checklist -->
+    <div class="slide">
+        <h3>시작 전 체크리스트</h3>
+        <ul class="list">
+            <li>☐ 도구 선택 (Claude Code / Cursor / Antigravity)</li>
+            <li>☐ 계정 생성 및 요금제 결제</li>
+            <li>☐ 설치 및 환경 설정</li>
+            <li>☐ CLAUDE.md 또는 .cursorrules 작성</li>
+            <li>☐ 연습용 프로젝트에서 테스트</li>
+            <li>☐ POC 과제에 적용</li>
+        </ul>
+    </div>
+
+    <!-- 88. Resources -->
+    <div class="slide surface">
+        <h3>참고 자료</h3>
+        <ul class="list">
+            <li><strong>Claude Code</strong> — docs.anthropic.com/claude-code</li>
+            <li><strong>Cursor</strong> — cursor.com/docs</li>
+            <li><strong>Antigravity</strong> — developers.google.com/antigravity</li>
+            <li><strong>MCP</strong> — modelcontextprotocol.io</li>
+        </ul>
+    </div>
+
+    <!-- 89. Summary Part 2 -->
     <div class="slide mint">
-        <h2>전체 정리</h2>
+        <h2>Part 2 정리</h2>
         <ul class="list" style="color: #fff;">
-            <li><strong>마인드셋</strong> — 고민 아웃소싱, 마스터셰프</li>
             <li><strong>Claude Code</strong> — 최강, $100/월 이상 필요</li>
             <li><strong>Cursor</strong> — 항상 옳은 선택, 안정적</li>
             <li><strong>Antigravity</strong> — 무료, 지금이 기회</li>
+            <li><strong>CLAUDE.md</strong> — 맥락 파일이 품질 결정</li>
             <li><strong>파이프라인</strong> — 반복 가능한 워크플로우 구축</li>
         </ul>
     </div>
 
-    <!-- 49. Confused Developer -->
-    <div class="slide">
-        <h2>그러면 우리는...?</h2>
-        <img src="confused-developer.png" alt="고민하는 개발자" style="max-width: 520px; margin: 32px 0; border-radius: 8px;">
-        <p class="sub" style="font-size: 1.3rem;">모르겠음..<br><br><span class="em">일단 열심히 하는 수밖에</span></p>
-    </div>
-
-    <!-- 50. Final -->
+    <!-- 90. Final -->
     <div class="slide blue">
         <h1>도구는 도구일 뿐</h1>
         <p class="sub">결국 중요한 건<br><span class="em">무엇을 만들어야 하는지 아는 것</span></p>
     </div>
 
-    <!-- 51. QA -->
+    <!-- 91. QA -->
     <div class="slide">
         <h1>Q&A</h1>
-        <p class="sub">감사합니다</p>
+        <p class="sub">이제 직접 설치하고 써봅시다</p>
         <p class="meta">김학민 · SE P/J</p>
     </div>
 
 </div>
 
-<div class="page-num"><span id="current">1</span> / <span id="total">53</span></div>
+<div class="page-num"><span id="current">1</span> / <span id="total">92</span></div>
 <div class="nav">
     <button onclick="prev()">←</button>
     <button onclick="next()">→</button>
