@@ -855,7 +855,40 @@
         <p class="sub">이렇게 요청하면 AI가 어떻게 동작하는지 확인해보자</p>
     </div>
 
-    <!-- 42. MCP Warning -->
+    <!-- 42. What is RAG -->
+    <div class="slide">
+        <h2>RAG가 뭔데?</h2>
+        <div class="quote-box" style="margin-top: 40px;">
+            <p style="font-size: 1.2rem;">모델이 <strong class="em">학습하지 않은 데이터</strong>를<br>넣어주는 모든 것</p>
+        </div>
+        <p class="sub" style="margin-top: 40px; font-size: 1.05rem;">
+            엄밀한 의미: <span class="em">Retrieval</span>-Augmented Generation<br>
+            = <strong>"검색"</strong> 첨부 질문<br><br>
+            <span style="font-size: 0.9rem; opacity: 0.7;">
+            (보통은 임베딩 벡터에 데이터 저장 → 의미 기반 검색 → 프롬프트에 첨부하는 파이프라인을 말함)
+            </span>
+        </p>
+    </div>
+
+    <!-- 43. What is MCP -->
+    <div class="slide surface">
+        <h2>MCP가 뭐야?</h2>
+        <div class="quote-box" style="margin-top: 40px;">
+            <p style="font-size: 1.3rem;"><strong class="em">몰라도 됨</strong></p>
+        </div>
+        <p class="sub" style="margin-top: 32px;">
+            그냥 <strong>"앱"</strong> 정도로 생각하면 됨<br><br>
+            <span style="font-size: 0.95rem;">
+            정확한 의미: 모든 AI Agent가 <span class="em">통일된 프로토콜</span>로 통신하자는 규약<br>
+            JIRA가 REST든 GraphQL이든 상관없듯이, 그냥 통신 방식일 뿐
+            </span>
+        </p>
+        <div class="tip" style="margin-top: 32px;">
+            <p>MCP 만들고 싶으면? → <strong>MCP Builder</strong> 쓰면 AI가 알아서 만들어줌</p>
+        </div>
+    </div>
+
+    <!-- 44. MCP Warning -->
     <div class="slide">
         <h2>MCP 좋다고<br>이것저것 다 등록하면</h2>
         <p class="sub" style="font-size: 1.5rem; margin-top: 48px;">
@@ -983,7 +1016,7 @@
 
 </div>
 
-<div class="page-num"><span id="current">1</span> / <span id="total">51</span></div>
+<div class="page-num"><span id="current">1</span> / <span id="total">53</span></div>
 <div class="nav">
     <button onclick="prev()">←</button>
     <button onclick="next()">→</button>
