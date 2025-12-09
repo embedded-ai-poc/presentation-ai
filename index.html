@@ -24,7 +24,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px;
+            padding: 60px;
             background: #0A0A0F;
         }
 
@@ -49,15 +49,15 @@
         .slide.light .em { color: #1428A0; }
 
         h1 {
-            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-size: clamp(3.2rem, 8vw, 6rem);
             font-weight: 900;
             text-align: center;
-            line-height: 1.12;
+            line-height: 1.15;
             letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-size: clamp(2.2rem, 5.5vw, 4rem);
             font-weight: 700;
             text-align: center;
             line-height: 1.2;
@@ -65,19 +65,19 @@
         }
 
         h3 {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: clamp(1.6rem, 3.5vw, 2.2rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 36px;
             letter-spacing: -0.01em;
         }
 
         .sub {
-            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            font-size: clamp(1.15rem, 2.2vw, 1.45rem);
             color: #8890A0;
-            margin-top: 32px;
+            margin-top: 28px;
             text-align: center;
-            line-height: 1.9;
+            line-height: 1.85;
             font-weight: 300;
         }
 
@@ -95,9 +95,9 @@
         }
 
         blockquote {
-            font-size: clamp(1.4rem, 3.5vw, 2.1rem);
+            font-size: clamp(1.6rem, 4vw, 2.4rem);
             font-weight: 300;
-            max-width: 760px;
+            max-width: 850px;
             text-align: center;
             line-height: 1.7;
             color: #F0F0F5;
@@ -113,7 +113,7 @@
         }
 
         .big {
-            font-size: clamp(7rem, 22vw, 14rem);
+            font-size: clamp(8rem, 25vw, 16rem);
             font-weight: 900;
             color: #4A8CFF;
             line-height: 1;
@@ -132,9 +132,9 @@
         .tool-card {
             background: #12141A;
             border: 1px solid #252830;
-            padding: 32px 36px;
-            min-width: 260px;
-            max-width: 300px;
+            padding: 36px 40px;
+            min-width: 280px;
+            max-width: 330px;
             text-align: center;
             border-radius: 8px;
         }
@@ -150,13 +150,13 @@
         }
 
         .tool-card .name {
-            font-size: 1.3rem;
+            font-size: 1.45rem;
             font-weight: 700;
             margin-bottom: 12px;
         }
 
         .tool-card .desc {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: #8890A0;
             line-height: 1.6;
             margin-bottom: 16px;
@@ -164,8 +164,8 @@
 
         .tool-card .tag {
             display: inline-block;
-            font-size: 0.7rem;
-            padding: 4px 10px;
+            font-size: 0.75rem;
+            padding: 5px 12px;
             background: #252830;
             color: #8890A0;
             border-radius: 4px;
@@ -186,10 +186,10 @@
         }
 
         .comp-item {
-            padding: 40px 48px;
+            padding: 44px 52px;
             text-align: center;
             background: #12141A;
-            min-width: 200px;
+            min-width: 220px;
             border: 1px solid #252830;
         }
 
@@ -206,18 +206,18 @@
         }
 
         .comp-item.on .tag { color: #8AB8FF; }
-        .comp-item p { font-size: 1.15rem; font-weight: 700; }
+        .comp-item p { font-size: 1.25rem; font-weight: 700; }
 
         /* List */
         .list {
             list-style: none;
-            max-width: 700px;
+            max-width: 780px;
             width: 100%;
         }
 
         .list li {
-            font-size: 1.15rem;
-            padding: 20px 0;
+            font-size: 1.25rem;
+            padding: 22px 0;
             border-bottom: 1px solid #252830;
             color: #A0A8B8;
             font-weight: 400;
@@ -232,13 +232,13 @@
         .code {
             background: #12141A;
             border: 1px solid #252830;
-            padding: 28px 32px;
+            padding: 32px 36px;
             font-family: 'JetBrains Mono', 'Consolas', monospace;
-            font-size: 0.85rem;
+            font-size: 0.95rem;
             line-height: 1.8;
-            max-width: 800px;
-            width: 90%;
-            margin: 32px 0;
+            max-width: 880px;
+            width: 92%;
+            margin: 28px 0;
             white-space: pre-wrap;
             color: #A0A8B8;
             text-align: left;
@@ -252,38 +252,38 @@
         /* Grid */
         .grid {
             display: flex;
-            gap: 16px;
-            margin-top: 48px;
+            gap: 18px;
+            margin-top: 44px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
         .grid-item {
-            padding: 28px 32px;
+            padding: 32px 36px;
             text-align: center;
             background: #12141A;
-            min-width: 150px;
+            min-width: 170px;
             border: 1px solid #252830;
             border-radius: 8px;
         }
 
         .slide.light .grid-item { background: #EAECF2; border-color: #D0D4E0; }
-        .grid-item .name { font-size: 1.05rem; font-weight: 700; margin-bottom: 8px; }
-        .grid-item .desc { font-size: 0.9rem; color: #6A7080; font-weight: 300; }
+        .grid-item .name { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+        .grid-item .desc { font-size: 1rem; color: #6A7080; font-weight: 300; }
 
         /* Step */
         .step {
             display: flex;
             align-items: flex-start;
             gap: 20px;
-            margin: 20px 0;
-            max-width: 700px;
+            margin: 22px 0;
+            max-width: 780px;
             text-align: left;
         }
 
         .step-num {
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background: #1428A0;
             border-radius: 50%;
             display: flex;
@@ -291,59 +291,60 @@
             justify-content: center;
             font-weight: 700;
             flex-shrink: 0;
+            font-size: 1.1rem;
         }
 
         .step-content { flex: 1; }
-        .step-content h4 { font-size: 1.1rem; margin-bottom: 8px; }
-        .step-content p { color: #8890A0; font-size: 0.95rem; line-height: 1.6; }
+        .step-content h4 { font-size: 1.2rem; margin-bottom: 8px; }
+        .step-content p { color: #8890A0; font-size: 1.05rem; line-height: 1.6; }
 
         /* Warning / Tip */
         .warn {
             background: #14161A;
-            border-left: 2px solid #F59E0B;
-            padding: 20px 28px;
-            margin-top: 36px;
-            max-width: 600px;
+            border-left: 3px solid #F59E0B;
+            padding: 24px 32px;
+            margin-top: 32px;
+            max-width: 680px;
         }
 
-        .warn p { color: #F59E0B; font-size: 1rem; font-weight: 400; }
+        .warn p { color: #F59E0B; font-size: 1.1rem; font-weight: 400; }
 
         .tip {
             background: #14161A;
-            border-left: 2px solid #10B981;
-            padding: 20px 28px;
-            margin-top: 36px;
-            max-width: 600px;
+            border-left: 3px solid #10B981;
+            padding: 24px 32px;
+            margin-top: 32px;
+            max-width: 680px;
         }
 
-        .tip p { color: #10B981; font-size: 1rem; font-weight: 400; }
+        .tip p { color: #10B981; font-size: 1.1rem; font-weight: 400; }
 
         /* Table */
-        .tbl { margin-top: 36px; border-collapse: collapse; }
-        .tbl th, .tbl td { padding: 16px 24px; text-align: left; border-bottom: 1px solid #252830; }
-        .tbl th { color: #5A6070; font-weight: 400; font-size: 0.85rem; letter-spacing: 0.05em; }
-        .tbl td { font-size: 0.95rem; color: #A0A8B8; }
+        .tbl { margin-top: 32px; border-collapse: collapse; }
+        .tbl th, .tbl td { padding: 18px 28px; text-align: left; border-bottom: 1px solid #252830; }
+        .tbl th { color: #5A6070; font-weight: 400; font-size: 0.95rem; letter-spacing: 0.05em; }
+        .tbl td { font-size: 1.05rem; color: #A0A8B8; }
 
         /* Quote Box */
         .quote-box {
             background: #12141A;
             border-left: 3px solid #4A8CFF;
-            padding: 24px 28px;
-            margin: 32px 0;
-            max-width: 650px;
+            padding: 28px 32px;
+            margin: 28px 0;
+            max-width: 720px;
         }
 
         .slide.light .quote-box { background: #E8EAF0; }
-        .quote-box p { font-size: 1.05rem; color: #A0A8B8; line-height: 1.7; font-weight: 300; }
+        .quote-box p { font-size: 1.15rem; color: #A0A8B8; line-height: 1.7; font-weight: 300; }
         .slide.light .quote-box p { color: #5A6070; }
-        .quote-box .author { margin-top: 16px; font-size: 0.9rem; color: #5A6070; }
+        .quote-box .author { margin-top: 16px; font-size: 1rem; color: #5A6070; }
 
         /* Pipeline */
         .pipeline {
             display: flex;
             align-items: center;
-            gap: 12px;
-            margin: 40px 0;
+            gap: 14px;
+            margin: 36px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -351,14 +352,14 @@
         .pipeline-step {
             background: #12141A;
             border: 1px solid #252830;
-            padding: 16px 20px;
-            font-size: 0.9rem;
+            padding: 18px 24px;
+            font-size: 1rem;
             font-weight: 600;
             text-align: center;
         }
 
         .pipeline-step.on { background: #1428A0; border-color: #4A8CFF; }
-        .pipeline-arrow { color: #3A4050; font-size: 1.2rem; }
+        .pipeline-arrow { color: #3A4050; font-size: 1.3rem; }
 
         /* Nav */
         .page-num {
@@ -401,17 +402,23 @@
             margin-bottom: 24px;
         }
 
+        /* Images - 20% larger */
+        .slide img {
+            max-width: 100%;
+            height: auto;
+        }
+
         @media (max-width: 768px) {
-            .slide { padding: 48px 28px; }
+            .slide { padding: 40px 24px; }
             .comp { flex-direction: column; gap: 12px; }
             .comp-item { min-width: auto; padding: 28px 24px; }
             .tool-card { min-width: auto; max-width: 100%; }
             .tool-cards { flex-direction: column; }
             .grid { flex-direction: column; }
-            .nav { left: 24px; bottom: 24px; }
-            .page-num { right: 24px; bottom: 24px; }
+            .nav { left: 20px; bottom: 20px; }
+            .page-num { right: 20px; bottom: 20px; }
             .pipeline { gap: 8px; }
-            .pipeline-step { padding: 12px 14px; font-size: 0.8rem; }
+            .pipeline-step { padding: 12px 14px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -454,7 +461,7 @@
     <!-- 05. How we use AI -->
     <div class="slide light">
         <h2>지금 우리가 AI 쓰는 법</h2>
-        <img src="ask-reply-paste.png" alt="질문-답변-복붙" style="max-width: 560px; margin: 40px 0;">
+        <img src="ask-reply-paste.png" alt="질문-답변-복붙" style="max-width: 670px; margin: 36px 0;">
         <p class="sub">질문 → 답변 → 복붙 → 끝<br>이건 AI를 <strong class="em">검색 엔진</strong>으로 쓰는 것</p>
     </div>
 
@@ -524,14 +531,14 @@ AI: 파일 분석 중...
 
     <!-- 11. Outsource Example -->
     <div class="slide surface">
-        <img src="kakaotalk-screen.png" alt="카카오톡 AI 대화" style="max-width: 450px; margin-bottom: 32px; border-radius: 8px;">
+        <img src="kakaotalk-screen.png" alt="카카오톡 AI 대화" style="max-width: 540px; margin-bottom: 28px; border-radius: 8px;">
         <p class="sub">적당히만 아웃소싱하고<br><span class="em">최종 점검은 직접</span> 하자</p>
     </div>
 
     <!-- 12. Master Chef -->
     <div class="slide light">
         <h1 style="color: #0A0A0F;">마스터셰프가 되어라</h1>
-        <img src="master-chef.png" alt="마스터셰프" style="max-width: 480px; border-radius: 8px; margin: 32px 0;">
+        <img src="master-chef.png" alt="마스터셰프" style="max-width: 580px; border-radius: 8px; margin: 28px 0;">
         <p class="sub">직접 모든 요리를 하지 않는다 · 각 스테이션을 <strong>지휘</strong>한다<br>품질을 <strong>책임</strong>진다 · <strong class="em">마지막 터치는 직접</strong></p>
     </div>
 
@@ -554,7 +561,7 @@ AI: 파일 분석 중...
     <!-- 13. Vibe Coding -->
     <div class="slide mint">
         <h2>Vibe Coding</h2>
-        <img src="vibe-coding.png" alt="Vibe Coding" style="max-width: 480px; margin: 32px 0; border-radius: 8px;">
+        <img src="vibe-coding.png" alt="Vibe Coding" style="max-width: 580px; margin: 28px 0; border-radius: 8px;">
         <p class="sub">Andrej Karpathy (2025.02)<br>"코드가 존재한다는 것 자체를 잊어버리는 코딩"</p>
     </div>
 
@@ -766,20 +773,20 @@ AI: 파일 분석 중...
     <!-- 32. Observation -->
     <div class="slide">
         <h2>실전: 관찰하기</h2>
-        <img src="thinking-developer.png" alt="관찰하는 개발자" style="max-width: 360px; margin: 32px 0;">
+        <img src="thinking-developer.png" alt="관찰하는 개발자" style="max-width: 430px; margin: 28px 0;">
         <p class="sub">AI 작업 중 (2-3분) 관찰하면서 질문하기<br>"왜 이 파일을 먼저?" "왜 여기서 막혔지?"</p>
     </div>
 
     <!-- 33. AI Slop -->
     <div class="slide surface">
         <h2>⚠️ AI Slop 주의</h2>
-        <img src="ai-slop.png" alt="AI Slop" style="max-width: 500px; margin: 40px 0;">
+        <img src="ai-slop.png" alt="AI Slop" style="max-width: 600px; margin: 36px 0;">
         <p class="sub">AI 생성 코드를 <span class="red">검증 없이</span> 그대로 쓰는 것</p>
     </div>
 
     <!-- 34. Vibe Coding Trap -->
     <div class="slide">
-        <img src="vibe-coding-trap.png" alt="바이브코딩의 함정" style="max-width: 800px; margin-bottom: 40px;">
+        <img src="vibe-coding-trap.png" alt="바이브코딩의 함정" style="max-width: 960px; margin-bottom: 36px;">
         <p class="sub" style="font-size: 1.15rem;">
             "입으로 코딩하면 되겠네?" 하고 덤볐던 사람들<br>
             <span class="red">결국 아무것도 완성 못함</span><br><br>
@@ -812,7 +819,7 @@ AI: 파일 분석 중...
         <p class="sub" style="margin-top: 0; margin-bottom: 24px; font-size: 1.4rem; color: #F0F0F5;">
             문서 업로드 → <span class="em">팟캐스트 형식 오디오북</span> 자동 생성
         </p>
-        <img src="notebooklm-screen.png" alt="NotebookLM" style="max-width: 95vw; width: 1100px; margin: 24px 0; border-radius: 8px; border: 1px solid #252830;">
+        <img src="notebooklm-screen.png" alt="NotebookLM" style="max-width: 95vw; width: 1200px; margin: 20px 0; border-radius: 8px; border: 1px solid #252830;">
         <p class="sub" style="font-size: 1rem;">PPT, 논문, 기술 문서 → 출퇴근길에 듣기</p>
     </div>
 
@@ -842,7 +849,7 @@ AI: 파일 분석 중...
     <!-- 41. 그러면 우리는? -->
     <div class="slide">
         <h2>그러면 우리는...?</h2>
-        <img src="confused-developer.png" alt="고민하는 개발자" style="max-width: 520px; margin: 32px 0; border-radius: 8px;">
+        <img src="confused-developer.png" alt="고민하는 개발자" style="max-width: 620px; margin: 28px 0; border-radius: 8px;">
         <p class="sub" style="font-size: 1.3rem;">모르겠음..<br><br><span class="em">일단 열심히 하는 수밖에</span></p>
     </div>
 
@@ -1146,7 +1153,7 @@ Respond in Korean when explaining.</div>
     <!-- 67. Outsource Thinking -->
     <div class="slide">
         <h1><span class="em">생각</span>과 <span class="em">문제</span>를<br>아웃소싱하자</h1>
-        <img src="kakaotalk-screen.png" alt="카카오톡 AI 대화" style="max-width: 400px; margin: 32px 0; border-radius: 8px;">
+        <img src="kakaotalk-screen.png" alt="카카오톡 AI 대화" style="max-width: 480px; margin: 28px 0; border-radius: 8px;">
         <p class="sub">"이 문제 어떻게 풀지?" 혼자 고민 ✗<br>"같이 생각해보자" AI에게 던지기 ✓</p>
     </div>
 
