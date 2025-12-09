@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 페어프로그래밍 - Day 2: 도구와 실전</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0A0A0F;
+            color: #F0F0F5;
+            overflow: hidden;
+        }
+
+        .slides { display: flex; }
+
+        .slide {
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            background: #0A0A0F;
+        }
+
+        .slide.surface { background: #0F1015; }
+        .slide.blue { background: linear-gradient(135deg, #0D1B3E 0%, #1428A0 100%); }
+        .slide.mint { background: linear-gradient(135deg, #064E3B 0%, #10B981 100%); }
+        .slide.orange { background: linear-gradient(135deg, #7C2D12 0%, #EA580C 100%); }
+        .slide.violet { background: linear-gradient(135deg, #3B0764 0%, #7C3AED 100%); }
+
+        .slide.mint .sub, .slide.orange .sub, .slide.violet .sub, .slide.blue .sub {
+            color: rgba(255,255,255,0.75);
+        }
+
+        .slide.mint .em { color: #6EE7B7; }
+        .slide.orange .em { color: #FED7AA; }
+        .slide.violet .em { color: #C4B5FD; }
+        .slide.blue .em { color: #8AB8FF; }
+
+        h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .sub {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: #8890A0;
+            margin-top: 32px;
+            text-align: center;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .em { color: #4A8CFF; }
+        .red { color: #F87171; }
+        .green { color: #10B981; }
+        .yellow { color: #FBBF24; }
+
+        .meta {
+            margin-top: 60px;
+            font-size: 0.95rem;
+            color: #4A5060;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* Tool Card */
+        .tool-card {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 32px 40px;
+            margin: 16px;
+            min-width: 280px;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        .tool-card.recommended {
+            border-color: #10B981;
+            background: linear-gradient(180deg, #0F1015 0%, #064E3B20 100%);
+        }
+
+        .tool-card .name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .tool-card .desc {
+            font-size: 0.95rem;
+            color: #8890A0;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .tool-card .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            padding: 4px 12px;
+            background: #252830;
+            color: #8890A0;
+            border-radius: 4px;
+            margin: 4px;
+        }
+
+        .tool-card .tag.green { background: #064E3B; color: #6EE7B7; }
+        .tool-card .tag.blue { background: #1E3A5F; color: #8AB8FF; }
+        .tool-card .tag.yellow { background: #713F12; color: #FCD34D; }
+
+        /* Comparison */
+        .comp {
+            display: flex;
+            gap: 24px;
+            margin: 48px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .comp-item {
+            padding: 40px 48px;
+            text-align: center;
+            background: #12141A;
+            min-width: 200px;
+            border: 1px solid #252830;
+        }
+
+        .comp-item.on {
+            background: #1428A0;
+            border-color: #4A8CFF;
+        }
+
+        .comp-item .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            color: #5A6070;
+        }
+
+        .comp-item.on .tag { color: #8AB8FF; }
+
+        .comp-item p {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        /* List */
+        .list {
+            list-style: none;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .list li {
+            font-size: 1.2rem;
+            padding: 22px 0;
+            border-bottom: 1px solid #252830;
+            color: #A0A8B8;
+            font-weight: 400;
+        }
+
+        .list li:last-child { border-bottom: none; }
+
+        .list strong {
+            color: #F0F0F5;
+            font-weight: 700;
+        }
+
+        /* Code Block */
+        .code {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 28px 32px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 800px;
+            width: 90%;
+            margin: 32px 0;
+            white-space: pre-wrap;
+            color: #A0A8B8;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .code .comment { color: #5A6070; }
+        .code .keyword { color: #C4B5FD; }
+        .code .string { color: #6EE7B7; }
+
+        /* Grid */
+        .grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .grid-item {
+            padding: 28px 32px;
+            text-align: center;
+            background: #12141A;
+            min-width: 150px;
+            border: 1px solid #252830;
+        }
+
+        .grid-item .name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .grid-item .desc {
+            font-size: 0.9rem;
+            color: #6A7080;
+            font-weight: 300;
+        }
+
+        /* Step */
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin: 20px 0;
+            max-width: 700px;
+            text-align: left;
+        }
+
+        .step-num {
+            width: 36px;
+            height: 36px;
+            background: #1428A0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: #8890A0;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Warning */
+        .warn {
+            background: #14161A;
+            border-left: 2px solid #F59E0B;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .warn p {
+            color: #F59E0B;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Tip */
+        .tip {
+            background: #14161A;
+            border-left: 2px solid #10B981;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .tip p {
+            color: #10B981;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        /* Table */
+        .tbl {
+            margin-top: 36px;
+            border-collapse: collapse;
+        }
+
+        .tbl th, .tbl td {
+            padding: 18px 28px;
+            text-align: left;
+            border-bottom: 1px solid #252830;
+        }
+
+        .tbl th {
+            color: #5A6070;
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .tbl td {
+            font-size: 1rem;
+            color: #A0A8B8;
+        }
+
+        /* Nav */
+        .page-num {
+            position: fixed;
+            bottom: 32px;
+            right: 48px;
+            font-size: 0.85rem;
+            color: #3A4050;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 32px;
+            left: 48px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav button {
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: 1px solid #252830;
+            color: #5A6070;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav button:hover {
+            border-color: #4A8CFF;
+            color: #4A8CFF;
+        }
+
+        @media (max-width: 768px) {
+            .slide { padding: 48px 28px; }
+            .comp { flex-direction: column; gap: 12px; }
+            .comp-item { min-width: auto; padding: 28px 24px; }
+            .tool-card { min-width: auto; max-width: 100%; }
+            .grid { flex-direction: column; }
+            .nav { left: 24px; bottom: 24px; }
+            .page-num { right: 24px; bottom: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="slides" id="slides">
+
+    <!-- 01. Cover -->
+    <div class="slide blue">
+        <h1>AI 페어프로그래밍</h1>
+        <p class="sub">Day 2: 도구와 실전</p>
+        <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
+    </div>
+
+    <!-- 02. Recap -->
+    <div class="slide surface">
+        <h2>어제 배운 것</h2>
+        <ul class="list">
+            <li><strong class="em">고민을 아웃소싱</strong> — AI와 함께 생각하기</li>
+            <li><strong>Model × Harness × Pilot</strong> — 세 요소의 균형</li>
+            <li><strong>Context Engineering</strong> — 맥락이 품질을 결정</li>
+            <li><strong class="red">AI Slop 금지</strong> — 검증 없이 쓰지 않기</li>
+        </ul>
+    </div>
+
+    <!-- 03. Today -->
+    <div class="slide">
+        <h2>오늘 할 것</h2>
+        <p class="sub" style="font-size: 1.4rem;">
+            <span class="em">도구 선택</span> → <span class="em">환경 설정</span> → <span class="em">POC 적용</span>
+        </p>
+    </div>
+
+    <!-- 04. Tool Landscape -->
+    <div class="slide surface">
+        <h3>AI 코딩 도구 지형도</h3>
+        <div class="comp">
+            <div class="tool-card">
+                <p class="name">Cursor</p>
+                <p class="desc">VS Code 포크<br>가장 대중적</p>
+                <span class="tag">IDE 통합</span>
+                <span class="tag yellow">유료 $20/월</span>
+            </div>
+            <div class="tool-card recommended">
+                <p class="name" style="color: #10B981;">Claude Code</p>
+                <p class="desc">Anthropic 공식 CLI<br>터미널 기반 Agent</p>
+                <span class="tag green">추천</span>
+                <span class="tag">API 과금</span>
+            </div>
+            <div class="tool-card">
+                <p class="name">Cline</p>
+                <p class="desc">VS Code 확장<br>오픈소스</p>
+                <span class="tag">무료</span>
+                <span class="tag">API 필요</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 05. Why Claude Code -->
+    <div class="slide mint">
+        <h1>왜 Claude Code인가</h1>
+        <p class="sub">
+            터미널 기반 = <span class="em">어디서든 동일한 경험</span><br><br>
+            Anthropic 공식 = <span class="em">최신 모델 즉시 적용</span><br><br>
+            Agent 모드 = <span class="em">파일 수정, 테스트, 커밋까지</span>
+        </p>
+    </div>
+
+    <!-- 06. Claude Code Install -->
+    <div class="slide surface">
+        <h3>Claude Code 설치</h3>
+        <div class="code"><span class="comment"># Node.js 18+ 필요</span>
+npm install -g @anthropic-ai/claude-code
+
+<span class="comment"># 설치 확인</span>
+claude --version
+
+<span class="comment"># 최초 실행 (API 키 입력)</span>
+claude</div>
+        <p class="sub">설치 후 Anthropic API 키 입력 → 바로 사용 가능</p>
+    </div>
+
+    <!-- 07. API Key -->
+    <div class="slide">
+        <h2>API 키 발급</h2>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>console.anthropic.com 접속</h4>
+                <p>Anthropic 콘솔에 로그인</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>API Keys → Create Key</h4>
+                <p>새 API 키 생성 (이름 지정)</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>키 복사 후 안전하게 보관</h4>
+                <p>한 번만 보여주므로 반드시 저장</p>
+            </div>
+        </div>
+        <div class="warn">
+            <p>⚠️ API 키는 절대 Git에 커밋하지 마세요</p>
+        </div>
+    </div>
+
+    <!-- 08. First Command -->
+    <div class="slide surface">
+        <h3>첫 번째 명령</h3>
+        <div class="code"><span class="comment"># 프로젝트 폴더로 이동</span>
+cd ~/projects/my-ssd-module
+
+<span class="comment"># Claude Code 실행</span>
+claude
+
+<span class="comment"># 첫 대화</span>
+> 이 프로젝트 구조 분석해줘</div>
+        <p class="sub">프로젝트 폴더에서 실행해야 컨텍스트 인식</p>
+    </div>
+
+    <!-- 09. CLAUDE.md -->
+    <div class="slide violet">
+        <h1>CLAUDE.md</h1>
+        <p class="sub">프로젝트의 <span class="em">맥락</span>을 알려주는 파일<br><br>어제 배운 Context Engineering의 실체</p>
+    </div>
+
+    <!-- 10. CLAUDE.md Example -->
+    <div class="slide surface">
+        <h3>CLAUDE.md 예시</h3>
+        <div class="code"><span class="comment"># Project: SSD FW GC Module</span>
+
+<span class="keyword">## 코딩 컨벤션</span>
+- MISRA C 2012 준수
+- 함수명: snake_case
+- 매크로: UPPER_SNAKE_CASE
+- 들여쓰기: 4 spaces
+
+<span class="keyword">## 빌드 명령</span>
+make -j8 TARGET=release
+
+<span class="keyword">## 테스트</span>
+make test SUITE=gc_unit
+
+<span class="keyword">## 주의사항</span>
+- 동적 메모리 할당 금지 (malloc/free)
+- 전역 변수 최소화
+- 모든 함수에 Doxygen 주석 필수</div>
+    </div>
+
+    <!-- 11. CLAUDE.md Structure -->
+    <div class="slide">
+        <h3>CLAUDE.md 필수 섹션</h3>
+        <ul class="list">
+            <li><strong>프로젝트 개요</strong> — 무엇을 하는 코드인지</li>
+            <li><strong>코딩 컨벤션</strong> — 스타일 가이드, 규칙</li>
+            <li><strong>빌드/테스트 명령</strong> — 어떻게 실행하는지</li>
+            <li><strong>디렉토리 구조</strong> — 주요 파일 위치</li>
+            <li><strong class="em">주의사항</strong> — 절대 하면 안 되는 것</li>
+        </ul>
+    </div>
+
+    <!-- 12. Agent Mode -->
+    <div class="slide orange">
+        <h1>Agent 모드</h1>
+        <p class="sub">대화가 아닌 <span class="em">작업 위임</span></p>
+    </div>
+
+    <!-- 13. Agent Example -->
+    <div class="slide surface">
+        <h3>Agent 모드 예시</h3>
+        <div class="code">> gc_manager.c의 wear_leveling 함수 리팩토링해줘.
+  기존 테스트 통과하면서 가독성 개선해줘.
+
+<span class="comment">Claude: 파일 분석 중...</span>
+<span class="comment">       → gc_manager.c 읽기</span>
+<span class="comment">       → 관련 테스트 파일 확인</span>
+<span class="comment">       → 리팩토링 진행</span>
+<span class="comment">       → make test 실행</span>
+<span class="comment">       → 결과: 12/12 pass</span>
+<span class="comment">       → 변경사항 요약</span>
+
+> /diff  <span class="comment"># 변경 내용 확인</span>
+> /commit  <span class="comment"># 커밋</span></div>
+    </div>
+
+    <!-- 14. Useful Commands -->
+    <div class="slide">
+        <h3>자주 쓰는 명령어</h3>
+        <table class="tbl">
+            <tr><th>명령어</th><th>설명</th></tr>
+            <tr><td><strong>/diff</strong></td><td>변경된 파일 diff 보기</td></tr>
+            <tr><td><strong>/commit</strong></td><td>변경사항 커밋</td></tr>
+            <tr><td><strong>/clear</strong></td><td>컨텍스트 초기화</td></tr>
+            <tr><td><strong>/cost</strong></td><td>현재 세션 비용 확인</td></tr>
+            <tr><td><strong>/help</strong></td><td>명령어 목록</td></tr>
+        </table>
+    </div>
+
+    <!-- 15. Permission System -->
+    <div class="slide surface">
+        <h2>권한 시스템</h2>
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">Ask</p>
+                <p>매번 확인</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">Auto-accept</p>
+                <p>자동 승인<br>(주의 필요)</p>
+            </div>
+        </div>
+        <p class="sub">파일 수정, 명령 실행 전 승인 요청<br><span class="yellow">처음엔 Ask 모드로 시작하세요</span></p>
+    </div>
+
+    <!-- 16. Cursor Overview -->
+    <div class="slide">
+        <h2>Cursor 간단 소개</h2>
+        <p class="sub" style="margin-bottom: 40px;">VS Code와 동일한 UI, AI 기능 내장</p>
+        <div class="grid">
+            <div class="grid-item">
+                <p class="name">Cmd+K</p>
+                <p class="desc">코드 생성/수정</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Cmd+L</p>
+                <p class="desc">채팅 열기</p>
+            </div>
+            <div class="grid-item">
+                <p class="name">Composer</p>
+                <p class="desc">멀티파일 작업</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 17. .cursorrules -->
+    <div class="slide surface">
+        <h3>.cursorrules</h3>
+        <div class="code"><span class="comment"># Cursor용 컨텍스트 파일</span>
+<span class="comment"># CLAUDE.md와 같은 역할</span>
+
+You are an expert SSD firmware engineer.
+Follow MISRA C 2012 guidelines.
+Never use dynamic memory allocation.
+Always write unit tests first (TDD).
+Use Doxygen-style comments for all functions.</div>
+        <p class="sub">CLAUDE.md ≈ .cursorrules (도구만 다름)</p>
+    </div>
+
+    <!-- 18. Tool Comparison -->
+    <div class="slide">
+        <h3>도구 비교 요약</h3>
+        <table class="tbl">
+            <tr><th></th><th>Claude Code</th><th>Cursor</th><th>Cline</th></tr>
+            <tr><td><strong>인터페이스</strong></td><td>터미널</td><td>IDE</td><td>VS Code 확장</td></tr>
+            <tr><td><strong>Agent 모드</strong></td><td class="green">◎</td><td>○</td><td>○</td></tr>
+            <tr><td><strong>학습 곡선</strong></td><td>중간</td><td>낮음</td><td>낮음</td></tr>
+            <tr><td><strong>비용</strong></td><td>사용량</td><td>$20/월</td><td>사용량</td></tr>
+        </table>
+        <p class="sub" style="font-size: 0.95rem; margin-top: 32px;">정답은 없음 — 본인에게 맞는 도구 선택</p>
+    </div>
+
+    <!-- 19. POC Section -->
+    <div class="slide blue">
+        <h1>POC 적용</h1>
+        <p class="sub">이론은 끝, 실전 시작</p>
+    </div>
+
+    <!-- 20. POC Workflow -->
+    <div class="slide surface">
+        <h3>POC 진행 워크플로우</h3>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>CLAUDE.md 작성</h4>
+                <p>프로젝트 컨텍스트 정리 (10분)</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>작은 작업부터 시작</h4>
+                <p>"이 함수 설명해줘" → "테스트 작성해줘"</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>점진적 확대</h4>
+                <p>리팩토링 → 새 기능 → 복잡한 작업</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+                <h4>반드시 검증</h4>
+                <p>빌드, 테스트, 코드 리뷰</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 21. Good First Tasks -->
+    <div class="slide">
+        <h3>좋은 첫 번째 작업</h3>
+        <ul class="list">
+            <li><strong class="green">✓</strong> 기존 코드 설명 요청</li>
+            <li><strong class="green">✓</strong> 단위 테스트 작성</li>
+            <li><strong class="green">✓</strong> 주석/문서화 추가</li>
+            <li><strong class="green">✓</strong> 간단한 리팩토링</li>
+            <li><strong class="red">✗</strong> 전체 아키텍처 변경 (너무 큼)</li>
+            <li><strong class="red">✗</strong> 새로운 모듈 전체 생성 (너무 큼)</li>
+        </ul>
+    </div>
+
+    <!-- 22. Prompt Tips -->
+    <div class="slide surface">
+        <h2>프롬프트 팁</h2>
+        <div class="comp">
+            <div class="comp-item">
+                <p class="tag">Bad</p>
+                <p style="font-size: 0.95rem;">"코드 개선해줘"</p>
+            </div>
+            <div class="comp-item on">
+                <p class="tag">Good</p>
+                <p style="font-size: 0.9rem;">"gc_manager.c의<br>wear_leveling 함수<br>가독성 개선해줘.<br>기존 테스트 유지."</p>
+            </div>
+        </div>
+        <p class="sub">구체적 + 범위 한정 + 검증 기준 명시</p>
+    </div>
+
+    <!-- 23. When AI Fails -->
+    <div class="slide">
+        <h2>AI가 막힐 때</h2>
+        <ul class="list">
+            <li><strong>컨텍스트 부족</strong> → CLAUDE.md 보강</li>
+            <li><strong>요청이 너무 큼</strong> → 작게 쪼개기</li>
+            <li><strong>할루시네이션</strong> → "정말 그래?" 되묻기</li>
+            <li><strong>반복 실패</strong> → <span class="em">/clear</span> 후 재시작</li>
+        </ul>
+    </div>
+
+    <!-- 24. Cost Management -->
+    <div class="slide surface">
+        <h3>비용 관리</h3>
+        <table class="tbl">
+            <tr><th>모델</th><th>입력</th><th>출력</th></tr>
+            <tr><td>Claude Sonnet 4</td><td>$3/1M</td><td>$15/1M</td></tr>
+            <tr><td>Claude Opus 4</td><td>$15/1M</td><td>$75/1M</td></tr>
+        </table>
+        <div class="tip">
+            <p>💡 일반 작업은 Sonnet, 복잡한 작업만 Opus 사용</p>
+        </div>
+        <p class="sub" style="font-size: 0.95rem;">/cost 명령으로 현재 세션 비용 확인 가능</p>
+    </div>
+
+    <!-- 25. Security -->
+    <div class="slide">
+        <h2>보안 주의사항</h2>
+        <ul class="list">
+            <li><strong class="red">API 키</strong> — 절대 코드에 하드코딩 금지</li>
+            <li><strong class="red">민감 데이터</strong> — 고객 정보, 키 등 프롬프트에 포함 금지</li>
+            <li><strong class="yellow">.gitignore</strong> — .env, API 키 파일 제외 확인</li>
+            <li><strong>코드 리뷰</strong> — AI 생성 코드도 반드시 검토</li>
+        </ul>
+    </div>
+
+    <!-- 26. Team Workflow -->
+    <div class="slide surface">
+        <h3>팀 협업 시</h3>
+        <div class="code"><span class="comment"># CLAUDE.md는 Git에 커밋</span>
+git add CLAUDE.md
+git commit -m "Add project context for AI tools"
+
+<span class="comment"># 팀원 모두 같은 컨텍스트 공유</span>
+<span class="comment"># → 일관된 AI 출력</span></div>
+        <p class="sub">CLAUDE.md를 팀 표준으로 관리하면<br>모든 팀원이 일관된 AI 경험</p>
+    </div>
+
+    <!-- 27. Checklist -->
+    <div class="slide">
+        <h3>POC 체크리스트</h3>
+        <ul class="list">
+            <li>☐ Claude Code / Cursor 설치 완료</li>
+            <li>☐ API 키 발급 및 설정</li>
+            <li>☐ CLAUDE.md 작성</li>
+            <li>☐ 첫 번째 작업 완료</li>
+            <li>☐ 빌드 & 테스트 통과</li>
+            <li>☐ 코드 리뷰 완료</li>
+        </ul>
+    </div>
+
+    <!-- 28. Resources -->
+    <div class="slide surface">
+        <h3>참고 자료</h3>
+        <ul class="list">
+            <li><strong>Claude Code 문서</strong> — docs.anthropic.com/claude-code</li>
+            <li><strong>Cursor 문서</strong> — cursor.sh/docs</li>
+            <li><strong>CLAUDE.md 예시</strong> — github.com/anthropics/claude-code</li>
+            <li><strong>프롬프트 엔지니어링</strong> — docs.anthropic.com/prompting</li>
+        </ul>
+    </div>
+
+    <!-- 29. Summary -->
+    <div class="slide mint">
+        <h2>오늘 배운 것</h2>
+        <ul class="list" style="color: #fff;">
+            <li><strong>Claude Code</strong> — 터미널 기반 Agent</li>
+            <li><strong>CLAUDE.md</strong> — 프로젝트 컨텍스트 파일</li>
+            <li><strong>Agent 모드</strong> — 작업 위임과 검증</li>
+            <li><strong>POC 워크플로우</strong> — 작게 시작, 점진적 확대</li>
+        </ul>
+    </div>
+
+    <!-- 30. Next Steps -->
+    <div class="slide">
+        <h2>다음 단계</h2>
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+                <h4>오늘 오후</h4>
+                <p>도구 설치 + CLAUDE.md 작성</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+                <h4>이번 주</h4>
+                <p>첫 번째 POC 작업 완료</p>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+                <h4>2주 후</h4>
+                <p>경험 공유 세션</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 31. Final -->
+    <div class="slide blue">
+        <h1>도구는 바뀌어도<br><span class="em">원리는 남는다</span></h1>
+        <p class="sub">어제 배운 마인드셋 + 오늘 배운 도구<br>= 여러분의 새로운 워크플로우</p>
+    </div>
+
+    <!-- 32. QA -->
+    <div class="slide">
+        <h1>Q&A</h1>
+        <p class="sub">이제 직접 해봅시다</p>
+        <p class="meta">김학민 · SE P/J</p>
+    </div>
+
+</div>
+
+<div class="page-num"><span id="current">1</span> / <span id="total">32</span></div>
+<div class="nav">
+    <button onclick="prev()">←</button>
+    <button onclick="next()">→</button>
+</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    document.getElementById('total').textContent = total;
+
+    function goTo(index) {
+        if (index < 0) index = 0;
+        if (index >= total) index = total - 1;
+        current = index;
+        document.getElementById('slides').style.transform = `translateX(-${current * 100}vw)`;
+        document.getElementById('current').textContent = current + 1;
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+            e.preventDefault();
+            next();
+        } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+            e.preventDefault();
+            prev();
+        }
+    });
+
+    let touchStartX = 0;
+    document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) next();
+            else prev();
+        }
+    });
+</script>
+
+</body>
+</html>
