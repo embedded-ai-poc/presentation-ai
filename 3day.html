@@ -33,7 +33,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px;
+            padding: 60px 80px;
             background: #0A0A0F;
         }
 
@@ -100,14 +100,14 @@
             font-size: clamp(1.4rem, 3vw, 2rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
             letter-spacing: -0.01em;
         }
 
         .sub {
             font-size: clamp(1.05rem, 2vw, 1.3rem);
             color: #8890A0;
-            margin-top: 32px;
+            margin-top: 24px;
             text-align: center;
             line-height: 1.9;
             font-weight: 300;
@@ -140,7 +140,7 @@
         .comp {
             display: flex;
             gap: 24px;
-            margin: 48px 0;
+            margin: 32px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -201,7 +201,7 @@
         .grid {
             display: flex;
             gap: 16px;
-            margin-top: 48px;
+            margin-top: 32px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -236,7 +236,7 @@
             line-height: 1.8;
             max-width: 800px;
             width: 90%;
-            margin: 32px 0;
+            margin: 24px 0;
             white-space: pre-wrap;
             color: #A0A8B8;
             text-align: left;
@@ -423,7 +423,7 @@
         <div class="slide blue">
             <h1>AI 페어프로그래밍</h1>
             <p class="sub">Day 3-1: Agentic Workflow 개념 & Skills</p>
-            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
+            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2026.1</p>
         </div>
 
         <!-- 02. Day 2 Recap -->
@@ -452,7 +452,7 @@
 
         <!-- 03-1. Agentic Workflow Image -->
         <div class="slide surface">
-            <img src="3-1day.png" alt="Agentic Workflow & Skills"
+            <img src="day3-agentic-cover.png" alt="Agentic Workflow & Skills"
                 style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <p class="sub">자율적인 AI 에이전트 팀과 나만의 워크플로우 팩토리</p>
         </div>
@@ -493,6 +493,8 @@
         <!-- 07. Personalization Philosophy -->
         <div class="slide surface">
             <h3>개인화 철학</h3>
+            <img src="personalization.png" alt="Personalization Philosophy"
+                style="max-width: 450px; margin: 32px 0; border-radius: 8px;">
             <ul class="list">
                 <li><strong class="red">남의 워크플로우 복사</strong> — 맥락이 다르면 효과 없음</li>
                 <li><strong class="yellow">패턴 학습</strong> — 다른 사람의 접근법 참고</li>
@@ -527,6 +529,8 @@
         <!-- 09. Workflow Patterns -->
         <div class="slide surface">
             <h3>워크플로우 패턴 3가지</h3>
+            <img src="multi-agent-pattern.png" alt="Multi-Agent Patterns"
+                style="max-width: 480px; margin: 32px 0; border-radius: 8px;">
             <ul class="list">
                 <li><strong class="em">검증 루프</strong> — 요구사항/설계/코드 각 단계 검증</li>
                 <li><strong>병렬 에이전트</strong> — 여러 관점에서 동시 분석</li>
@@ -560,6 +564,8 @@
         <!-- 12. Skill Structure -->
         <div class="slide">
             <h3>Skill 폴더 구조</h3>
+            <img src="skill-structure.png" alt="Skill Structure"
+                style="max-width: 450px; margin: 32px 0; border-radius: 8px;">
             <div class="code">~/.claude/skills/my-workflow/
                 ├── <span class="keyword">SKILL.md</span> # 스킬 정의 (필수)
                 ├── templates/ # 템플릿 파일들
@@ -850,6 +856,20 @@
                 <li><strong>로깅</strong> — MCP 호출 기록 남기기</li>
                 <li><strong class="green">사내망 한정</strong> — 외부 노출 차단</li>
             </ul>
+        </div>
+
+        <!-- 33. MCP 트러블슈팅 -->
+        <div class="slide surface">
+            <h3>MCP 트러블슈팅</h3>
+            <ul class="list">
+                <li><strong class="red">MCP 서버 연결 실패</strong> — npx 경로 확인, 방화벽 체크</li>
+                <li><strong class="yellow">Context7 응답 없음</strong> — API 키 환경변수 확인</li>
+                <li><strong class="yellow">권한 오류</strong> — 실행 권한 부여 (chmod +x)</li>
+                <li><strong class="green">로그 확인</strong> — ~/.claude/logs/ 디렉토리</li>
+            </ul>
+            <div class="tip">
+                <p>문제 발생 시 claude mcp status 명령으로 상태 확인</p>
+            </div>
         </div>
 
         <!-- ==================== Part 5: 병렬 Agent ==================== -->

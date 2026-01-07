@@ -33,7 +33,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 80px;
+            padding: 60px 80px;
             background: #0A0A0F;
         }
 
@@ -105,14 +105,14 @@
             font-size: clamp(1.4rem, 3vw, 2rem);
             font-weight: 700;
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
             letter-spacing: -0.01em;
         }
 
         .sub {
             font-size: clamp(1.05rem, 2vw, 1.3rem);
             color: #8890A0;
-            margin-top: 32px;
+            margin-top: 24px;
             text-align: center;
             line-height: 1.9;
             font-weight: 300;
@@ -153,7 +153,7 @@
         .comp {
             display: flex;
             gap: 24px;
-            margin: 48px 0;
+            margin: 32px 0;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -214,7 +214,7 @@
         .grid {
             display: flex;
             gap: 16px;
-            margin-top: 48px;
+            margin-top: 32px;
             flex-wrap: wrap;
             justify-content: center;
         }
@@ -249,7 +249,7 @@
             line-height: 1.8;
             max-width: 800px;
             width: 90%;
-            margin: 32px 0;
+            margin: 24px 0;
             white-space: pre-wrap;
             color: #A0A8B8;
             text-align: left;
@@ -460,7 +460,7 @@
         <div class="slide blue">
             <h1>AI 페어프로그래밍</h1>
             <p class="sub">Day 2-1: Context Engineering</p>
-            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
+            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2026.1</p>
         </div>
 
         <!-- 02. Day 1 Recap -->
@@ -472,6 +472,20 @@
                 <li><strong>Model × Harness × Pilot</strong> — 세 요소의 균형</li>
                 <li><strong>Agent 체험</strong> — 시켜놓고 지켜보기</li>
             </ul>
+        </div>
+
+        <!-- 02-1. 환경 점검 -->
+        <div class="slide">
+            <h3>환경 점검 체크리스트</h3>
+            <ul class="list">
+                <li><strong class="green">Claude Code</strong> — <code>claude --version</code> 확인</li>
+                <li><strong class="green">프로젝트 폴더</strong> — 실습용 프로젝트 준비</li>
+                <li><strong class="green">Git</strong> — 버전 관리 가능 여부</li>
+                <li><strong class="yellow">CLAUDE.md</strong> — 오늘 작성 예정</li>
+            </ul>
+            <div class="tip">
+                <p>문제가 있으면 지금 손 들어주세요!</p>
+            </div>
         </div>
 
         <!-- 03. Today's Goal -->
@@ -488,7 +502,7 @@
 
         <!-- 03-1. Context Engineering Image -->
         <div class="slide surface">
-            <img src="2-1day.png" alt="Context Engineering"
+            <img src="day2-context-cover.png" alt="Context Engineering"
                 style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <p class="sub">AI에게 완벽한 맥락을 제공하는 컨텍스트 엔지니어링</p>
         </div>
@@ -577,6 +591,8 @@
         <!-- 10. CLAUDE.md Example -->
         <div class="slide surface">
             <h3>CLAUDE.md 예시 (SSD FW)</h3>
+            <img src="security-warning-2d.png" alt="Security Warning"
+                style="max-width: 400px; margin-bottom: 24px; border-radius: 8px;">
             <div class="code"><span class="keyword"># Project: SSD FW GC Module</span>
 
                 <span class="keyword">## 코딩 컨벤션</span>
@@ -659,6 +675,8 @@
         <!-- 16. Concept -->
         <div class="slide surface">
             <h2>Rule-Growing이란</h2>
+            <img src="rule-growing.png" alt="Rule Growing"
+                style="max-width: 480px; margin: 32px 0; border-radius: 8px;">
             <div class="pipeline">
                 <div class="pipeline-step">AI한테 시키기</div>
                 <span class="pipeline-arrow">→</span>
@@ -756,6 +774,8 @@
         <!-- 24. Pipeline Concept -->
         <div class="slide surface">
             <h2>파이프라인을 구축하자</h2>
+            <img src="loopback-workflow.png" alt="Loopback Workflow"
+                style="max-width: 480px; margin: 32px 0; border-radius: 8px;">
             <div class="pipeline">
                 <div class="pipeline-step">요구사항 분석</div>
                 <span class="pipeline-arrow">→</span>
@@ -772,7 +792,7 @@
 
         <!-- 25. Pipeline Image -->
         <div class="slide surface">
-            <img src="2-2day.png" alt="AI Pipeline & TDD"
+            <img src="day2-pipeline-cover.png" alt="AI Pipeline & TDD"
                 style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <p class="sub">자동화된 검증과 피드백 루프: AI 파이프라인</p>
         </div>
