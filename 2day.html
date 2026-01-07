@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 페어프로그래밍 - Day 2-2: 파이프라인 & TDD</title>
+    <title>AI 페어프로그래밍 - Day 2: Context Engineering & 파이프라인</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
         rel="stylesheet">
@@ -450,19 +450,310 @@
 
 <body>
 
-    <div class="part-label">Day 2-2 · 파이프라인 & TDD</div>
+    <div class="part-label">Day 2 · Context & Pipeline</div>
 
     <div class="slides" id="slides">
 
-        <!-- ==================== Part 3: 파이프라인 설계 ==================== -->
+        <!-- ==================== Part 1: Context Engineering ==================== -->
 
         <!-- 01. Cover -->
+        <div class="slide blue">
+            <h1>AI 페어프로그래밍</h1>
+            <p class="sub">Day 2-1: Context Engineering</p>
+            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
+        </div>
+
+        <!-- 02. Day 1 Recap -->
+        <div class="slide surface">
+            <h2>Day 1 리캡</h2>
+            <ul class="list">
+                <li><strong class="em">고민을 아웃소싱</strong> — 생각 자체를 AI와 나누기</li>
+                <li><strong>마스터셰프</strong> — 직접 요리 ✗, 주방 지휘 ✓</li>
+                <li><strong>Model × Harness × Pilot</strong> — 세 요소의 균형</li>
+                <li><strong>Agent 체험</strong> — 시켜놓고 지켜보기</li>
+            </ul>
+        </div>
+
+        <!-- 03. Today's Goal -->
+        <div class="slide">
+            <h2>오늘의 목표</h2>
+            <p class="sub" style="font-size: 1.4rem;">
+                <span class="em">맥락을 잘 줘야 결과가 좋다</span>
+            </p>
+            <p class="sub" style="margin-top: 48px; font-size: 1rem; opacity: 0.7;">
+                CLAUDE.md 작성 능력 확보<br>
+                반복 가능한 파이프라인 설계
+            </p>
+        </div>
+
+        <!-- 03-1. Context Engineering Image -->
+        <div class="slide surface">
+            <img src="2-1day.png" alt="Context Engineering"
+                style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <p class="sub">AI에게 완벽한 맥락을 제공하는 컨텍스트 엔지니어링</p>
+        </div>
+
+        <!-- 04. Section Title -->
+        <div class="slide violet">
+            <h1>Context<br>Engineering</h1>
+            <p class="sub">같은 AI, 같은 요청이라도<br><span class="em">맥락</span>에 따라 결과가 완전히 다름</p>
+        </div>
+
+        <!-- 05. Context Comparison -->
+        <div class="slide surface">
+            <h3>맥락의 차이</h3>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">맥락 없이</p>
+                    <p style="font-size:0.95rem">"페이지 매핑 테이블<br>구조체 만들어줘"</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">맥락 제공</p>
+                    <p style="font-size:0.9rem">"HIL 모듈용, 4KB 페이지,<br>2TB 지원, MISRA C 2012,<br>ftl_types.h 호환"</p>
+                </div>
+            </div>
+            <p class="sub">결과물의 품질이 완전히 달라집니다</p>
+        </div>
+
+        <!-- 06. Context Sources -->
+        <div class="slide">
+            <h3>Context의 출처</h3>
+            <img src="context-sources.png" alt="Context Sources"
+                style="max-width: 450px; margin-bottom: 32px; border-radius: 8px;">
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="name em">CLAUDE.md</p>
+                    <p class="desc">프로젝트 레벨</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">대화 히스토리</p>
+                    <p class="desc">세션 레벨</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">파일 참조</p>
+                    <p class="desc">요청 레벨</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">MCP</p>
+                    <p class="desc">외부 도구</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 07. CLAUDE.md Intro -->
+        <div class="slide mint">
+            <h1>CLAUDE.md</h1>
+            <p class="sub">프로젝트의 <span class="em">맥락</span>을 알려주는 파일<br><br>이것 하나로 AI 출력 품질이 완전히 달라짐</p>
+        </div>
+
+        <!-- 08. CLAUDE.md vs cursorrules -->
+        <div class="slide surface">
+            <h3>CLAUDE.md vs .cursorrules</h3>
+            <div class="comp">
+                <div class="comp-item on">
+                    <p class="tag">Claude Code</p>
+                    <p>CLAUDE.md</p>
+                </div>
+                <div class="comp-item">
+                    <p class="tag">Cursor</p>
+                    <p>.cursorrules</p>
+                </div>
+            </div>
+            <p class="sub">역할은 동일 — 프로젝트 맥락 제공<br>도구에 따라 파일명만 다름</p>
+        </div>
+
+        <!-- 09. CLAUDE.md Structure -->
+        <div class="slide">
+            <h3>CLAUDE.md 필수 섹션</h3>
+            <ul class="list">
+                <li><strong>프로젝트 개요</strong> — 이 프로젝트가 뭔지</li>
+                <li><strong>코딩 컨벤션</strong> — 따라야 할 스타일 가이드</li>
+                <li><strong>빌드 & 테스트</strong> — 빌드/테스트 명령어</li>
+                <li><strong class="red">절대 금지</strong> — 하면 안 되는 것들</li>
+                <li><strong class="green">필수 사항</strong> — 반드시 해야 하는 것들</li>
+            </ul>
+        </div>
+
+        <!-- 10. CLAUDE.md Example -->
+        <div class="slide surface">
+            <h3>CLAUDE.md 예시 (SSD FW)</h3>
+            <div class="code"><span class="keyword"># Project: SSD FW GC Module</span>
+
+                <span class="keyword">## 코딩 컨벤션</span>
+                - MISRA C 2012 준수
+                - 함수명: snake_case / 매크로: UPPER_SNAKE_CASE
+                - 들여쓰기: 4 spaces (탭 금지)
+
+                <span class="keyword">## 빌드 & 테스트</span>
+                make -j8 TARGET=release
+                make test SUITE=gc_unit
+
+                <span class="keyword">## 절대 금지</span>
+                - 동적 메모리 할당 (malloc/free) ❌
+                - 전역 변수 남용 ❌
+            </div>
+        </div>
+
+        <!-- 11. CLAUDE.md Example 2 -->
+        <div class="slide">
+            <h3>CLAUDE.md 예시 (계속)</h3>
+            <div class="code"><span class="keyword">## 필수</span>
+                - 모든 함수에 Doxygen 주석
+                - 에러 핸들링 명시적으로
+                - 모든 변경에 대해 테스트 추가
+
+                <span class="keyword">## 아키텍처</span>
+                - HIL: Host Interface Layer
+                - FIL: Flash Interface Layer
+                - FTL: Flash Translation Layer
+                - GC는 FTL 하위 모듈
+
+                <span class="keyword">## 참고 파일</span>
+                - /docs/coding_rule.md
+                - /docs/architecture.md
+            </div>
+        </div>
+
+        <!-- 12. Good vs Bad -->
+        <div class="slide surface">
+            <h3>좋은 예시 vs 나쁜 예시</h3>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">나쁜 예시</p>
+                    <p style="font-size:0.9rem">"깔끔하게 짜줘"<br>"좋은 코드로"<br>"잘 해줘"</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">좋은 예시</p>
+                    <p style="font-size:0.85rem">MISRA C 2012 준수<br>함수당 50줄 이내<br>cyclomatic complexity ≤10</p>
+                </div>
+            </div>
+            <p class="sub">구체적이고 측정 가능한 기준을 제시</p>
+        </div>
+
+        <!-- 13. Practice -->
+        <div class="slide orange">
+            <h1>실습</h1>
+            <p class="sub">우리 프로젝트용 CLAUDE.md 작성하기</p>
+        </div>
+
+        <!-- 14. Practice Guide -->
+        <div class="slide surface">
+            <h3>CLAUDE.md 작성 실습</h3>
+            <ul class="list">
+                <li><strong>Step 1</strong> — 담당 모듈의 특성 정리</li>
+                <li><strong>Step 2</strong> — 코딩 컨벤션 명시</li>
+                <li><strong>Step 3</strong> — 빌드/테스트 명령어 정리</li>
+                <li><strong>Step 4</strong> — 절대 금지 사항 목록화</li>
+                <li><strong>Step 5</strong> — 팀원과 리뷰 & 피드백</li>
+            </ul>
+        </div>
+
+        <!-- ==================== Part 2: Rule-Growing Development ==================== -->
+
+        <!-- 15. Section Title -->
+        <div class="slide mint">
+            <h1>Rule-Growing<br>Development</h1>
+            <p class="sub">코드와 룰이 함께 자라난다</p>
+        </div>
+
+        <!-- 16. Concept -->
+        <div class="slide surface">
+            <h2>Rule-Growing이란</h2>
+            <div class="pipeline">
+                <div class="pipeline-step">AI한테 시키기</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">이상한 짓 관찰</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step on">룰 추가</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">반복</div>
+            </div>
+            <p class="sub">CLAUDE.md가 점점 정교해집니다</p>
+        </div>
+
+        <!-- 17. Example -->
+        <div class="slide">
+            <h3>실제 사례</h3>
+            <div class="code"><span class="comment"># 문제 발견</span>
+                AI가 계속 printf로 디버깅 로그를 넣음
+                → 우리 프로젝트는 LOG_DEBUG 매크로 사용
+
+                <span class="comment"># CLAUDE.md에 추가</span>
+                ## 절대 금지
+                - printf 직접 사용 ❌ (LOG_DEBUG 매크로 사용)
+
+                <span class="comment"># 결과</span>
+                이후 AI는 LOG_DEBUG 매크로만 사용
+            </div>
+        </div>
+
+        <!-- 18. Version Control -->
+        <div class="slide surface">
+            <h2>CLAUDE.md 버전 관리</h2>
+            <ul class="list">
+                <li><strong>Git으로 관리</strong> — 변경 이력 추적</li>
+                <li><strong>팀 레포에 공유</strong> — 팀원 모두 동일한 맥락</li>
+                <li><strong>PR 리뷰</strong> — 룰 추가/수정도 리뷰 대상</li>
+                <li><strong>지속적 개선</strong> — 발견할 때마다 업데이트</li>
+            </ul>
+        </div>
+
+        <!-- 19. Evolution -->
+        <div class="slide">
+            <h3>CLAUDE.md 진화 예시</h3>
+            <div class="code"><span class="keyword">v1.0</span> (초기)
+                - MISRA C 준수
+                - 탭 금지
+
+                <span class="keyword">v1.1</span> (1주 후)
+                - printf 금지 → LOG_DEBUG 사용
+                - 함수당 50줄 이내
+
+                <span class="keyword">v1.2</span> (2주 후)
+                - assert 대신 ERROR_CHECK 매크로
+                - 모든 포인터 NULL 체크 필수
+            </div>
+        </div>
+
+        <!-- 20. Team Collaboration -->
+        <div class="slide surface">
+            <h3>팀 협업: CLAUDE.md 전략</h3>
+            <ul class="list">
+                <li><strong>루트 CLAUDE.md</strong> — 프로젝트 공통 규칙</li>
+                <li><strong>모듈별 CLAUDE.md</strong> — 각 모듈 특화 규칙</li>
+                <li><strong>~/.claude/CLAUDE.md</strong> — 개인 선호 설정</li>
+            </ul>
+            <div class="tip">
+                <p>Claude는 모든 경로의 CLAUDE.md를 자동으로 읽어서 합칩니다</p>
+            </div>
+        </div>
+
+        <!-- 21. Summary -->
+        <div class="slide">
+            <h2>Part 1 핵심 정리</h2>
+            <ul class="list">
+                <li><strong class="em">Context Engineering</strong> — 맥락이 품질을 결정</li>
+                <li><strong>CLAUDE.md</strong> — 프로젝트 맥락 파일 작성</li>
+                <li><strong>Rule-Growing</strong> — 코드와 룰이 함께 진화</li>
+                <li><strong>팀 협업</strong> — Git으로 CLAUDE.md 공유</li>
+            </ul>
+        </div>
+
+        <!-- 22. Break -->
+        <div class="slide blue">
+            <h1>휴식</h1>
+            <p class="sub">10분 후 Part 2: 파이프라인 설계</p>
+        </div>
+
+        <!-- ==================== Part 3: 파이프라인 설계 ==================== -->
+
+        <!-- 23. Cover -->
         <div class="slide violet">
             <h1>파이프라인<br>설계</h1>
             <p class="sub">반복 가능한 워크플로우 구축</p>
         </div>
 
-        <!-- 02. Pipeline Concept -->
+        <!-- 24. Pipeline Concept -->
         <div class="slide surface">
             <h2>파이프라인을 구축하자</h2>
             <div class="pipeline">
@@ -479,14 +770,14 @@
             <p class="sub">각 단계에 AI 역할을 부여</p>
         </div>
 
-        <!-- 02-1. Pipeline Image -->
+        <!-- 25. Pipeline Image -->
         <div class="slide surface">
             <img src="2-2day.png" alt="AI Pipeline & TDD"
                 style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
             <p class="sub">자동화된 검증과 피드백 루프: AI 파이프라인</p>
         </div>
 
-        <!-- 03. Why Pipeline -->
+        <!-- 26. Why Pipeline -->
         <div class="slide">
             <h3>왜 파이프라인인가</h3>
             <ul class="list">
@@ -497,7 +788,7 @@
             </ul>
         </div>
 
-        <!-- 04. Role Assignment -->
+        <!-- 27. Role Assignment -->
         <div class="slide surface">
             <h3>AI에게 역할 부여하기</h3>
             <div class="code"><span class="string">"너는 시니어 요구사항 분석가야. 스펙의 핵심을 정리해줘."</span>
@@ -511,7 +802,7 @@
             <p class="sub">같은 AI도 역할에 따라 다른 관점으로 작업</p>
         </div>
 
-        <!-- 05. Multi-Agent Concept -->
+        <!-- 28. Multi-Agent Concept -->
         <div class="slide">
             <h2>Multi-Agent 패턴</h2>
             <p class="sub" style="margin-bottom: 32px;">하나의 AI가 아니라 여러 역할로 분리</p>
@@ -535,7 +826,7 @@
             </div>
         </div>
 
-        <!-- 06. Loopback -->
+        <!-- 29. Loopback -->
         <div class="slide surface">
             <h2>루프백 워크플로우</h2>
             <p class="sub" style="margin-bottom: 32px;">실패하면 앞으로 돌아가기</p>
@@ -546,7 +837,7 @@
                 코드리뷰에서 문제 발견되면 해당 단계로 돌아가게."</div>
         </div>
 
-        <!-- 07. Loopback Diagram -->
+        <!-- 30. Loopback Diagram -->
         <div class="slide">
             <h3>루프백 흐름도</h3>
             <img src="loopback-workflow.png" alt="Loopback Workflow"
@@ -554,7 +845,7 @@
             <p class="sub">무한 루프 방지를 위해 최대 반복 횟수 설정 권장</p>
         </div>
 
-        <!-- 08. Max Loop -->
+        <!-- 31. Max Loop -->
         <div class="slide surface">
             <h3>무한 루프 방지</h3>
             <div class="code"><span class="comment"># 프롬프트 예시</span>
@@ -570,7 +861,7 @@
             </div>
         </div>
 
-        <!-- 09. Tools Integration -->
+        <!-- 32. Tools Integration -->
         <div class="slide">
             <h3>파이프라인에 도구 연결</h3>
             <div class="code"><span class="comment"># 요구사항 분석 단계</span>
@@ -587,7 +878,7 @@
             </div>
         </div>
 
-        <!-- 10. Verification Phase -->
+        <!-- 33. Verification Phase -->
         <div class="slide surface">
             <h3>검증 단계의 중요성</h3>
             <div class="comp">
@@ -605,13 +896,13 @@
 
         <!-- ==================== Part 4: TDD 실습 ==================== -->
 
-        <!-- 11. Section Title -->
+        <!-- 34. Section Title -->
         <div class="slide orange">
             <h1>TDD 실습</h1>
             <p class="sub">AI와 함께하는 테스트 주도 개발</p>
         </div>
 
-        <!-- 12. Why TDD with AI -->
+        <!-- 35. Why TDD with AI -->
         <div class="slide surface">
             <h2>왜 AI에게 TDD가 좋은가</h2>
             <div class="comp">
@@ -627,7 +918,7 @@
             <p class="sub">TDD는 AI에게 시키기 최적의 작업</p>
         </div>
 
-        <!-- 13. Kent Beck -->
+        <!-- 36. Kent Beck -->
         <div class="slide">
             <h2>켄트 벡이<br>다시 강연 다니는 이유</h2>
             <p class="sub" style="margin-top: 48px;">
@@ -636,7 +927,7 @@
             </p>
         </div>
 
-        <!-- 14. TDD Cycle -->
+        <!-- 37. TDD Cycle -->
         <div class="slide surface">
             <h3>TDD 사이클: Red-Green-Refactor</h3>
             <div class="pipeline">
@@ -652,7 +943,7 @@
             <p class="sub">이 사이클을 AI와 함께 반복</p>
         </div>
 
-        <!-- 15. TDD Prompt -->
+        <!-- 38. TDD Prompt -->
         <div class="slide">
             <h3>TDD 프롬프트 패턴</h3>
             <div class="code"><span class="comment"># Step 1: 테스트 먼저 (Red)</span>
@@ -667,7 +958,7 @@
             </div>
         </div>
 
-        <!-- 16. TDD Example -->
+        <!-- 39. TDD Example -->
         <div class="slide surface">
             <h3>TDD 실습 예시</h3>
             <div class="code"><span class="comment"># Step 1: 테스트 먼저 작성 (Red)</span>
@@ -684,7 +975,7 @@
             </div>
         </div>
 
-        <!-- 17. Test Case Types -->
+        <!-- 40. Test Case Types -->
         <div class="slide">
             <h3>테스트 케이스 유형</h3>
             <div class="grid">
@@ -708,7 +999,7 @@
             <p class="sub">AI에게 "이 4가지 유형 모두 작성해줘"라고 요청</p>
         </div>
 
-        <!-- 18. Coverage -->
+        <!-- 41. Coverage -->
         <div class="slide surface">
             <h3>커버리지 목표 설정</h3>
             <div class="code"><span class="comment"># CLAUDE.md에 추가</span>
@@ -723,13 +1014,13 @@
             </div>
         </div>
 
-        <!-- 19. TDD Practice -->
+        <!-- 42. TDD Practice -->
         <div class="slide orange">
             <h1>실습 시간</h1>
             <p class="sub">담당 모듈에서 함수 하나 선택해서 TDD</p>
         </div>
 
-        <!-- 20. TDD Practice Steps -->
+        <!-- 43. TDD Practice Steps -->
         <div class="slide surface">
             <h2>실습 단계</h2>
             <ul class="list">
@@ -744,7 +1035,7 @@
 
         <!-- ==================== Part 5: 마무리 ==================== -->
 
-        <!-- 21. Summary -->
+        <!-- 44. Summary -->
         <div class="slide">
             <h2>Day 2 핵심 정리</h2>
             <ul class="list">
@@ -756,7 +1047,7 @@
             </ul>
         </div>
 
-        <!-- 22. Tomorrow Preview -->
+        <!-- 45. Tomorrow Preview -->
         <div class="slide surface">
             <h2>내일 예습</h2>
             <ul class="list">
@@ -767,7 +1058,7 @@
             </ul>
         </div>
 
-        <!-- 23. Homework -->
+        <!-- 46. Homework -->
         <div class="slide">
             <h2>오늘의 과제</h2>
             <ul class="list">
@@ -778,7 +1069,7 @@
             </ul>
         </div>
 
-        <!-- 24. QA -->
+        <!-- 47. QA -->
         <div class="slide blue">
             <h1>Q&A</h1>
             <p class="sub">감사합니다</p>
@@ -787,7 +1078,7 @@
 
     </div>
 
-    <div class="page-num"><span id="current">1</span> / <span id="total">24</span></div>
+    <div class="page-num"><span id="current">1</span> / <span id="total">1</span></div>
     <div class="nav">
         <button onclick="prev()">←</button>
         <button onclick="next()">→</button>

@@ -1,0 +1,50 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/hakmin_1.kim/.claude/skills/power-workflow/hooks/workflow-stop-hook.js\""
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/hakmin_1.kim/.claude/skills/power-workflow/hooks/subagent-stop-hook.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/hakmin_1.kim/.claude/skills/power-workflow/hooks/task-start-hook.js\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"C:/Users/hakmin_1.kim/.claude/skills/power-workflow/hooks/task-counter-hook.js\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}
