@@ -111,7 +111,7 @@
         }
 
         h3 {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
             font-weight: 700;
             text-align: center;
             margin-bottom: 24px;
@@ -119,8 +119,8 @@
         }
 
         .sub {
-            font-size: clamp(1.05rem, 2vw, 1.3rem);
-            color: #8890A0;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: #9AA0B0;
             margin-top: 24px;
             text-align: center;
             line-height: 1.9;
@@ -128,7 +128,7 @@
         }
 
         .slide.light .sub {
-            color: #5A6070;
+            color: #4A5568;
         }
 
         .em {
@@ -231,10 +231,10 @@
         }
 
         .list li {
-            font-size: 1.15rem;
+            font-size: 1.2rem;
             padding: 20px 0;
             border-bottom: 1px solid #252830;
-            color: #A0A8B8;
+            color: #B0B8C8;
             font-weight: 400;
         }
 
@@ -682,8 +682,8 @@
         <div class="slide">
             <div class="big">10%</div>
             <p class="sub">우리 대부분이 AI를 쓰는 수준</p>
-            <img src="confused-developer.png" alt="Confused Developer"
-                style="max-width: 400px; margin-top: 24px; border-radius: 8px;">
+            <img src="ai-usage-10-2d.png" alt="10% AI Usage"
+                style="max-width: 400px; margin-top: 24px; border-radius: 12px;">
         </div>
 
         <!-- 06. How we use AI -->
@@ -1147,13 +1147,14 @@
         <div class="slide surface">
             <h2>첫 대화 시작하기</h2>
             <div class="code"><span class="comment"># 프로젝트 폴더로 이동</span>
-cd ~/my-project
+                cd ~/my-project
 
-<span class="comment"># Claude Code 시작</span>
-claude
+                <span class="comment"># Claude Code 시작</span>
+                claude
 
-<span class="comment"># 첫 번째 요청</span>
-> 이 프로젝트 구조 설명해줘</div>
+                <span class="comment"># 첫 번째 요청</span>
+                > 이 프로젝트 구조 설명해줘
+            </div>
         </div>
 
         <!-- 43. Ask for Explanation -->
@@ -1161,11 +1162,11 @@ claude
             <h2>"이 함수 설명해줘"</h2>
             <div class="code">> gc_manager.c의 collect_garbage 함수가 뭘 하는 건지 설명해줘
 
-AI: 이 함수는 SSD의 Garbage Collection을 담당합니다.
-1. 먼저 valid page 비율이 가장 낮은 블록을 선정...
-2. 해당 블록의 valid page들을 새 블록으로 복사...
-3. 원본 블록을 erase...
-...</div>
+                AI: 이 함수는 SSD의 Garbage Collection을 담당합니다.
+                1. 먼저 valid page 비율이 가장 낮은 블록을 선정...
+                2. 해당 블록의 valid page들을 새 블록으로 복사...
+                3. 원본 블록을 erase...
+                ...</div>
             <p class="sub">코드를 읽어주고 분석해줍니다</p>
         </div>
 
@@ -1174,265 +1175,266 @@ AI: 이 함수는 SSD의 Garbage Collection을 담당합니다.
             <h2>"좀 더 쉽게 설명해줘"</h2>
             <div class="code">> 12살한테 설명하듯이 다시 설명해줘
 
-AI: SSD는 데이터를 저장할 때 마치 책장에 책을 꽂는 것처럼 해요.
-그런데 책을 지우면 빈 공간이 생기죠?
+                AI: SSD는 데이터를 저장할 때 마치 책장에 책을 꽂는 것처럼 해요.
+                그런데 책을 지우면 빈 공간이 생기죠?
 
-GC는 청소부 아저씨예요.
-- 빈 공간이 많은 선반을 찾아서
-- 남아있는 책들을 다른 선반으로 옮기고
-- 선반을 깨끗이 비워요
+                GC는 청소부 아저씨예요.
+                - 빈 공간이 많은 선반을 찾아서
+                - 남아있는 책들을 다른 선반으로 옮기고
+                - 선반을 깨끗이 비워요
 
-그러면 새 책을 넣을 공간이 생기죠!</div>
+                그러면 새 책을 넣을 공간이 생기죠!</div>
         </div>
 
-    <!-- 45. Keep Digging -->
-    <div class="slide">
-        <h2>모르는 것 계속 파고들기</h2>
-        <div class="code">> 왜 valid page 비율이 낮은 블록을 선택하는 거야?
+        <!-- 45. Keep Digging -->
+        <div class="slide">
+            <h2>모르는 것 계속 파고들기</h2>
+            <div class="code">> 왜 valid page 비율이 낮은 블록을 선택하는 거야?
 
-            > "erase"는 뭐야? 왜 필요해?
+                > "erase"는 뭐야? 왜 필요해?
 
-            > NAND Flash의 특성상 erase가 필요한 이유가 뭐야?
+                > NAND Flash의 특성상 erase가 필요한 이유가 뭐야?
 
-            > 그럼 erase 횟수에 제한이 있어?</div>
-        <p class="sub">한 질문이 다음 질문으로 이어집니다</p>
-    </div>
-
-    <!-- 46. Agent Taste -->
-    <div class="slide mint">
-        <h1>Agent 맛보기</h1>
-        <p class="sub">"시켜놓고 지켜보기"의 진정한 맛</p>
-    </div>
-
-    <!-- 47. Analyze and Test -->
-    <div class="slide surface">
-        <h2>"분석하고 테스트 추가해줘"</h2>
-        <div class="code">> wear_leveling.c 분석하고 테스트 케이스 추가해줘
-
-            AI: 파일 분석 중...
-            → 현재 테스트 커버리지 확인
-            → 누락된 엣지 케이스 식별
-            → test_wear_leveling.c에 테스트 추가 중
-            → 빌드 확인...
-            → 테스트 실행: 5/5 pass
-
-            완료! 다음 테스트 케이스를 추가했습니다:
-            - test_block_erase_count_limit
-            - test_wear_leveling_threshold
-            ...</div>
-    </div>
-
-    <!-- 48. Watch AI Work -->
-    <div class="slide">
-        <h2>시켜놓고 지켜보기</h2>
-        <img src="thinking-developer.png" alt="관찰하는 개발자" style="max-width: 360px; margin: 32px 0;">
-        <p class="sub">AI 작업 중 (2-3분) 관찰하면서 질문하기<br>"왜 이 파일을 먼저?" "왜 여기서 막혔지?"</p>
-    </div>
-
-    <!-- 49. What to Watch -->
-    <div class="slide surface">
-        <h3>관찰할 것들</h3>
-        <ul class="list">
-            <li><strong>어떤 파일을 먼저 읽는가</strong> — AI의 탐색 전략</li>
-            <li><strong>어디서 헤매는가</strong> — 컨텍스트 부족 신호</li>
-            <li><strong>어떤 명령을 실행하는가</strong> — 작업 방식 이해</li>
-            <li><strong>실패했을 때 어떻게 복구하는가</strong> — 에러 핸들링</li>
-        </ul>
-    </div>
-
-    <!-- 50. Why littlefs -->
-    <div class="slide surface">
-        <h2>왜 littlefs인가?</h2>
-        <ul class="list">
-            <li><strong>임베디드용 파일시스템</strong> — SSD FW와 유사한 도메인</li>
-            <li><strong>컴팩트한 코드</strong> — AI가 한눈에 파악하기 좋음</li>
-            <li><strong>실제 오픈소스</strong> — 현실적인 문제 해결 경험</li>
-        </ul>
-        <p class="sub" style="margin-top: 24px;">우리의 업무 환경과 가장 닮은 연습장입니다</p>
-    </div>
-
-    <!-- 51. Practice: littlefs -->
-    <div class="slide">
-        <h2>실습: littlefs 탐색</h2>
-        <div class="code"><span class="comment"># littlefs 클론</span>
-            git clone https://github.com/littlefs-project/littlefs.git
-            cd littlefs
-
-            <span class="comment"># Claude Code로 탐색</span>
-            claude
-
-            > 이 프로젝트 구조 설명해줘
-            > lfs_file_write 함수가 어떻게 동작하는지 설명해줘
-            > 이 함수에 대한 테스트 케이스 추가해줘
+                > 그럼 erase 횟수에 제한이 있어?</div>
+            <p class="sub">한 질문이 다음 질문으로 이어집니다</p>
         </div>
-    </div>
 
-    <!-- 51. Review Changes -->
-    <div class="slide surface">
-        <h2>결과 검토하기</h2>
-        <div class="code"><span class="comment"># diff 확인</span>
-            git diff
-
-            <span class="comment"># 변경 사항 검토</span>
-            > 왜 이렇게 구현했어?
-            > 더 나은 방법은 없어?
-
-            <span class="comment"># 만족스러우면 승인</span>
-            git add .
-            git commit -m "Add test cases for lfs_file_write"
+        <!-- 46. Agent Taste -->
+        <div class="slide mint">
+            <h1>Agent 맛보기</h1>
+            <p class="sub">"시켜놓고 지켜보기"의 진정한 맛</p>
         </div>
-    </div>
 
-    <!-- ==================== Part 5: 주의사항 & 마무리 ==================== -->
+        <!-- 47. Analyze and Test -->
+        <div class="slide surface">
+            <h2>"분석하고 테스트 추가해줘"</h2>
+            <div class="code">> wear_leveling.c 분석하고 테스트 케이스 추가해줘
 
-    <!-- 52. Section Title -->
-    <div class="slide violet">
-        <h1>주의사항</h1>
-        <p class="sub">AI를 쓸 때 반드시 알아야 할 것들</p>
-    </div>
+                AI: 파일 분석 중...
+                → 현재 테스트 커버리지 확인
+                → 누락된 엣지 케이스 식별
+                → test_wear_leveling.c에 테스트 추가 중
+                → 빌드 확인...
+                → 테스트 실행: 5/5 pass
 
-    <!-- 53. AI Slop -->
-    <div class="slide surface">
-        <h2>AI Slop 주의</h2>
-        <img src="ai-slop.png" alt="AI Slop" style="max-width: 500px; margin: 40px 0;">
-        <p class="sub">AI가 생성한 코드를 <span class="red">검증 없이</span> 그대로 쓰는 것<br>
-        아무리 좋은 모델이라도 <strong>검증은 필수</strong></p>
-    </div>
+                완료! 다음 테스트 케이스를 추가했습니다:
+                - test_block_erase_count_limit
+                - test_wear_leveling_threshold
+                ...</div>
+        </div>
 
-    <!-- 55. Real Case -->
-    <div class="slide surface">
-        <h3>실제 사례 (2026.01)</h3>
-        <p class="sub" style="font-size: 1.25rem; color: #F0F0F5;">Lovable에서 생성된 1,645개 웹앱 중<br><span class="red">170개에서
-                개인정보 유출 취약점</span> 발견</p>
-        <p class="sub" style="margin-top: 48px;"><strong class="em">마지막 터치는 여러분이 해야 합니다</strong></p>
-    </div>
+        <!-- 48. Watch AI Work -->
+        <div class="slide">
+            <h2>시켜놓고 지켜보기</h2>
+            <img src="thinking-developer.png" alt="관찰하는 개발자" style="max-width: 360px; margin: 32px 0;">
+            <p class="sub">AI 작업 중 (2-3분) 관찰하면서 질문하기<br>"왜 이 파일을 먼저?" "왜 여기서 막혔지?"</p>
+        </div>
 
-    <!-- 56. Code is Liability -->
-    <div class="slide">
-        <h1>코드는 <span class="red">부채</span>다</h1>
-        <p class="sub">자산이 아닙니다<br>유지보수 부담, 버그, 기술 부채<br><br>필요한 <strong>최소한의 코드</strong>만 유지</p>
-    </div>
+        <!-- 49. What to Watch -->
+        <div class="slide surface">
+            <h3>관찰할 것들</h3>
+            <ul class="list">
+                <li><strong>어떤 파일을 먼저 읽는가</strong> — AI의 탐색 전략</li>
+                <li><strong>어디서 헤매는가</strong> — 컨텍스트 부족 신호</li>
+                <li><strong>어떤 명령을 실행하는가</strong> — 작업 방식 이해</li>
+                <li><strong>실패했을 때 어떻게 복구하는가</strong> — 에러 핸들링</li>
+            </ul>
+        </div>
 
-    <!-- 57. Security Warning -->
-    <div class="slide surface">
-        <h2>보안 주의사항</h2>
-        <ul class="list">
-            <li><strong class="red">API 키</strong> — 절대 코드에 하드코딩 금지</li>
-            <li><strong class="red">민감 데이터</strong> — 고객 정보, 내부 키 프롬프트 금지</li>
-            <li><strong class="yellow">.gitignore</strong> — .env, 키 파일 제외 확인</li>
-            <li><strong>코드 리뷰</strong> — AI 생성 코드도 반드시 검토</li>
-        </ul>
-    </div>
+        <!-- 50. Why littlefs -->
+        <div class="slide surface">
+            <h2>왜 littlefs인가?</h2>
+            <ul class="list">
+                <li><strong>임베디드용 파일시스템</strong> — SSD FW와 유사한 도메인</li>
+                <li><strong>컴팩트한 코드</strong> — AI가 한눈에 파악하기 좋음</li>
+                <li><strong>실제 오픈소스</strong> — 현실적인 문제 해결 경험</li>
+            </ul>
+            <p class="sub" style="margin-top: 24px;">우리의 업무 환경과 가장 닮은 연습장입니다</p>
+        </div>
 
-    <!-- 58. AI Makes Docs -->
-    <div class="slide mint">
-        <h1>AI는 코드보다<br><span class="em">문서</span>를 더 잘 만든다</h1>
-        <p class="sub">발표 자료, 기술 문서, 보고서, 스프레드시트<br>"HTML로 멋진 문서 만들어줘" → 기가 막히게</p>
-    </div>
+        <!-- 51. Practice: littlefs -->
+        <div class="slide">
+            <h2>실습: littlefs 탐색</h2>
+            <div class="code"><span class="comment"># littlefs 클론</span>
+                git clone https://github.com/littlefs-project/littlefs.git
+                cd littlefs
 
-    <!-- 59. NotebookLM -->
-    <div class="slide surface">
-        <h2>Google NotebookLM</h2>
-        <p class="sub" style="margin-top: 0; margin-bottom: 24px; font-size: 1.4rem; color: #F0F0F5;">
-            문서 업로드 → <span class="em">팟캐스트 형식 오디오북</span> 자동 생성
-        </p>
-        <img src="notebooklm-screen.png" alt="NotebookLM"
-            style="max-width: 95vw; width: 1000px; margin: 24px 0; border-radius: 8px; border: 1px solid #252830;">
-        <p class="sub" style="font-size: 1rem;">PPT, 논문, 기술 문서 → 출퇴근길에 듣기</p>
-    </div>
+                <span class="comment"># Claude Code로 탐색</span>
+                claude
 
-    <!-- 60. Multi Process -->
-    <div class="slide surface">
-        <h2>여유가 생겼다면</h2>
-        <p class="sub" style="max-width: 550px;">
-            <strong class="em">병렬로 돌리세요</strong>
-        </p>
-        <p class="sub" style="margin-top: 32px; font-size: 1rem; opacity: 0.8;">
-            "집에서 코딩한다" = 열정적인 개발자?<br><br>
-            실상은 <span class="em">게임 오토모드</span> 돌리듯<br>
-            AI 수행시키고 유튜브 보다가 결과만 확인
-        </p>
-    </div>
+                > 이 프로젝트 구조 설명해줘
+                > lfs_file_write 함수가 어떻게 동작하는지 설명해줘
+                > 이 함수에 대한 테스트 케이스 추가해줘
+            </div>
+        </div>
 
-    <!-- 61. Summary -->
-    <div class="slide surface">
-        <h2>Day 1 핵심 정리</h2>
-        <ul class="list">
-            <li><strong class="em">고민을 아웃소싱</strong> — 생각 자체를 AI와 나누기</li>
-            <li><strong>마스터셰프가 되세요</strong> — 직접 요리 ✗, 주방 지휘 ✓</li>
-            <li><strong>Tool보다 원리</strong> — 도구는 계속 바뀝니다</li>
-            <li><strong class="em">Model × Harness × Pilot</strong> — 세 요소의 균형</li>
-            <li><strong>마지막 터치는 직접</strong> — AI Slop 금지</li>
-        </ul>
-    </div>
+        <!-- 51. Review Changes -->
+        <div class="slide surface">
+            <h2>결과 검토하기</h2>
+            <div class="code"><span class="comment"># diff 확인</span>
+                git diff
 
-    <!-- 62. What to Know -->
-    <div class="slide">
-        <h1>"코딩 잘하는 사람"이<br>아니라</h1>
-    </div>
+                <span class="comment"># 변경 사항 검토</span>
+                > 왜 이렇게 구현했어?
+                > 더 나은 방법은 없어?
 
-    <!-- 63. What Wins -->
-    <div class="slide blue">
-        <h1><span class="em">"무엇을 만들어야<br>하는지 아는 사람"</span>이<br>이깁니다</h1>
-    </div>
+                <span class="comment"># 만족스러우면 승인</span>
+                git add .
+                git commit -m "Add test cases for lfs_file_write"
+            </div>
+        </div>
 
-    <!-- 64. Tomorrow Preview -->
-    <div class="slide surface">
-        <h2>내일 예습</h2>
-        <ul class="list">
-            <li><strong>CLAUDE.md</strong> — 프로젝트 맥락 파일</li>
-            <li><strong>Context Engineering</strong> — 맥락 설계의 중요성</li>
-            <li><strong>파이프라인 설계</strong> — 반복 가능한 워크플로우</li>
-            <li><strong>TDD 실습</strong> — AI와 함께하는 테스트 주도 개발</li>
-        </ul>
-    </div>
+        <!-- ==================== Part 5: 주의사항 & 마무리 ==================== -->
 
-    <!-- 65. 개인 실습 시간 -->
-    <div class="slide orange">
-        <h1>개인 실습 시간</h1>
-        <p class="sub">15:30~17:00 · 자유롭게 시도해보세요</p>
-    </div>
+        <!-- 52. Section Title -->
+        <div class="slide violet">
+            <h1>주의사항</h1>
+            <p class="sub">AI를 쓸 때 반드시 알아야 할 것들</p>
+        </div>
 
-    <!-- 66. 실습 주제 선택 -->
-    <div class="slide surface">
-        <h3>실습 주제 (선택)</h3>
-        <ul class="list">
-            <li><strong>옵션 1</strong> — littlefs 계속 탐색하기</li>
-            <li><strong>옵션 2</strong> — 본인 프로젝트에 AI 적용해보기</li>
-            <li><strong>옵션 3</strong> — 간단한 웹앱 만들어보기</li>
-            <li><strong>옵션 4</strong> — 문서 작성 자동화 시도</li>
-        </ul>
-        <p class="sub">막히면 언제든 손 들고 질문하세요</p>
-    </div>
+        <!-- 53. AI Slop -->
+        <div class="slide surface">
+            <h2>AI Slop 주의</h2>
+            <img src="ai-slop.png" alt="AI Slop" style="max-width: 500px; margin: 40px 0;">
+            <p class="sub">AI가 생성한 코드를 <span class="red">검증 없이</span> 그대로 쓰는 것<br>
+                아무리 좋은 모델이라도 <strong>검증은 필수</strong></p>
+        </div>
 
-    <!-- 67. 실습 유의사항 -->
-    <div class="slide">
-        <h3>실습 시 유의사항</h3>
-        <ul class="list">
-            <li><strong>작게 시작</strong> — 한 번에 너무 큰 작업 요청하지 말기</li>
-            <li><strong>검토 필수</strong> — 결과를 반드시 검토하고 이해하기</li>
-            <li><strong>실패 OK</strong> — 실패해도 괜찮습니다, 그게 학습입니다</li>
-            <li><strong>질문 환영</strong> — 궁금한 건 바로바로 물어보세요</li>
-        </ul>
-    </div>
+        <!-- 55. Real Case -->
+        <div class="slide surface">
+            <h3>실제 사례 (2026.01)</h3>
+            <p class="sub" style="font-size: 1.25rem; color: #F0F0F5;">Lovable에서 생성된 1,645개 웹앱 중<br><span
+                    class="red">170개에서
+                    개인정보 유출 취약점</span> 발견</p>
+            <p class="sub" style="margin-top: 48px;"><strong class="em">마지막 터치는 여러분이 해야 합니다</strong></p>
+        </div>
 
-    <!-- 68. Homework -->
-    <div class="slide">
-        <h2>오늘의 과제</h2>
-        <ul class="list">
-            <li>☐ Claude Code 설치 및 로그인 확인</li>
-            <li>☐ littlefs 또는 연습용 프로젝트 클론</li>
-            <li>☐ "이 프로젝트 설명해줘" 요청해보기</li>
-            <li>☐ 간단한 수정 요청하고 결과 검토하기</li>
-        </ul>
-    </div>
+        <!-- 56. Code is Liability -->
+        <div class="slide">
+            <h1>코드는 <span class="red">부채</span>다</h1>
+            <p class="sub">자산이 아닙니다<br>유지보수 부담, 버그, 기술 부채<br><br>필요한 <strong>최소한의 코드</strong>만 유지</p>
+        </div>
 
-    <!-- 66. QA -->
-    <div class="slide">
-        <h1>Q&A</h1>
-        <p class="sub">감사합니다</p>
-        <p class="meta">김학민 · SE P/J</p>
-    </div>
+        <!-- 57. Security Warning -->
+        <div class="slide surface">
+            <h2>보안 주의사항</h2>
+            <ul class="list">
+                <li><strong class="red">API 키</strong> — 절대 코드에 하드코딩 금지</li>
+                <li><strong class="red">민감 데이터</strong> — 고객 정보, 내부 키 프롬프트 금지</li>
+                <li><strong class="yellow">.gitignore</strong> — .env, 키 파일 제외 확인</li>
+                <li><strong>코드 리뷰</strong> — AI 생성 코드도 반드시 검토</li>
+            </ul>
+        </div>
+
+        <!-- 58. AI Makes Docs -->
+        <div class="slide mint">
+            <h1>AI는 코드보다<br><span class="em">문서</span>를 더 잘 만든다</h1>
+            <p class="sub">발표 자료, 기술 문서, 보고서, 스프레드시트<br>"HTML로 멋진 문서 만들어줘" → 기가 막히게</p>
+        </div>
+
+        <!-- 59. NotebookLM -->
+        <div class="slide surface">
+            <h2>Google NotebookLM</h2>
+            <p class="sub" style="margin-top: 0; margin-bottom: 24px; font-size: 1.4rem; color: #F0F0F5;">
+                문서 업로드 → <span class="em">팟캐스트 형식 오디오북</span> 자동 생성
+            </p>
+            <img src="notebooklm-screen.png" alt="NotebookLM"
+                style="max-width: 95vw; width: 1000px; margin: 24px 0; border-radius: 8px; border: 1px solid #252830;">
+            <p class="sub" style="font-size: 1rem;">PPT, 논문, 기술 문서 → 출퇴근길에 듣기</p>
+        </div>
+
+        <!-- 60. Multi Process -->
+        <div class="slide surface">
+            <h2>여유가 생겼다면</h2>
+            <p class="sub" style="max-width: 550px;">
+                <strong class="em">병렬로 돌리세요</strong>
+            </p>
+            <p class="sub" style="margin-top: 32px; font-size: 1rem; opacity: 0.8;">
+                "집에서 코딩한다" = 열정적인 개발자?<br><br>
+                실상은 <span class="em">게임 오토모드</span> 돌리듯<br>
+                AI 수행시키고 유튜브 보다가 결과만 확인
+            </p>
+        </div>
+
+        <!-- 61. Summary -->
+        <div class="slide surface">
+            <h2>Day 1 핵심 정리</h2>
+            <ul class="list">
+                <li><strong class="em">고민을 아웃소싱</strong> — 생각 자체를 AI와 나누기</li>
+                <li><strong>마스터셰프가 되세요</strong> — 직접 요리 ✗, 주방 지휘 ✓</li>
+                <li><strong>Tool보다 원리</strong> — 도구는 계속 바뀝니다</li>
+                <li><strong class="em">Model × Harness × Pilot</strong> — 세 요소의 균형</li>
+                <li><strong>마지막 터치는 직접</strong> — AI Slop 금지</li>
+            </ul>
+        </div>
+
+        <!-- 62. What to Know -->
+        <div class="slide">
+            <h1>"코딩 잘하는 사람"이<br>아니라</h1>
+        </div>
+
+        <!-- 63. What Wins -->
+        <div class="slide blue">
+            <h1><span class="em">"무엇을 만들어야<br>하는지 아는 사람"</span>이<br>이깁니다</h1>
+        </div>
+
+        <!-- 64. Tomorrow Preview -->
+        <div class="slide surface">
+            <h2>내일 예습</h2>
+            <ul class="list">
+                <li><strong>CLAUDE.md</strong> — 프로젝트 맥락 파일</li>
+                <li><strong>Context Engineering</strong> — 맥락 설계의 중요성</li>
+                <li><strong>파이프라인 설계</strong> — 반복 가능한 워크플로우</li>
+                <li><strong>TDD 실습</strong> — AI와 함께하는 테스트 주도 개발</li>
+            </ul>
+        </div>
+
+        <!-- 65. 개인 실습 시간 -->
+        <div class="slide orange">
+            <h1>개인 실습 시간</h1>
+            <p class="sub">15:30~17:00 · 자유롭게 시도해보세요</p>
+        </div>
+
+        <!-- 66. 실습 주제 선택 -->
+        <div class="slide surface">
+            <h3>실습 주제 (선택)</h3>
+            <ul class="list">
+                <li><strong>옵션 1</strong> — littlefs 계속 탐색하기</li>
+                <li><strong>옵션 2</strong> — 본인 프로젝트에 AI 적용해보기</li>
+                <li><strong>옵션 3</strong> — 간단한 웹앱 만들어보기</li>
+                <li><strong>옵션 4</strong> — 문서 작성 자동화 시도</li>
+            </ul>
+            <p class="sub">막히면 언제든 손 들고 질문하세요</p>
+        </div>
+
+        <!-- 67. 실습 유의사항 -->
+        <div class="slide">
+            <h3>실습 시 유의사항</h3>
+            <ul class="list">
+                <li><strong>작게 시작</strong> — 한 번에 너무 큰 작업 요청하지 말기</li>
+                <li><strong>검토 필수</strong> — 결과를 반드시 검토하고 이해하기</li>
+                <li><strong>실패 OK</strong> — 실패해도 괜찮습니다, 그게 학습입니다</li>
+                <li><strong>질문 환영</strong> — 궁금한 건 바로바로 물어보세요</li>
+            </ul>
+        </div>
+
+        <!-- 68. Homework -->
+        <div class="slide">
+            <h2>오늘의 과제</h2>
+            <ul class="list">
+                <li>☐ Claude Code 설치 및 로그인 확인</li>
+                <li>☐ littlefs 또는 연습용 프로젝트 클론</li>
+                <li>☐ "이 프로젝트 설명해줘" 요청해보기</li>
+                <li>☐ 간단한 수정 요청하고 결과 검토하기</li>
+            </ul>
+        </div>
+
+        <!-- 66. QA -->
+        <div class="slide">
+            <h1>Q&A</h1>
+            <p class="sub">감사합니다</p>
+            <p class="meta">김학민 · SE P/J</p>
+        </div>
 
     </div>
 
