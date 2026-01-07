@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 페어프로그래밍 - Day 2-2: 파이프라인 & TDD</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0A0A0F;
+            color: #F0F0F5;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+        }
+
+        .slide {
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            background: #0A0A0F;
+        }
+
+        .slide.light {
+            background: #F5F6FA;
+            color: #0A0A0F;
+        }
+
+        .slide.blue {
+            background: linear-gradient(135deg, #0D1B3E 0%, #1428A0 100%);
+        }
+
+        .slide.surface {
+            background: #0F1015;
+        }
+
+        .slide.mint {
+            background: linear-gradient(135deg, #064E3B 0%, #10B981 100%);
+        }
+
+        .slide.orange {
+            background: linear-gradient(135deg, #7C2D12 0%, #EA580C 100%);
+        }
+
+        .slide.violet {
+            background: linear-gradient(135deg, #3B0764 0%, #7C3AED 100%);
+        }
+
+        .slide.mint .sub,
+        .slide.orange .sub,
+        .slide.violet .sub,
+        .slide.blue .sub {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .slide.mint .em {
+            color: #6EE7B7;
+        }
+
+        .slide.orange .em {
+            color: #FED7AA;
+        }
+
+        .slide.violet .em {
+            color: #C4B5FD;
+        }
+
+        .slide.blue .em {
+            color: #8AB8FF;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .sub {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: #8890A0;
+            margin-top: 32px;
+            text-align: center;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .slide.light .sub {
+            color: #5A6070;
+        }
+
+        .em {
+            color: #4A8CFF;
+        }
+
+        .slide.light .em {
+            color: #1428A0;
+        }
+
+        .red {
+            color: #F87171;
+        }
+
+        .green {
+            color: #10B981;
+        }
+
+        .yellow {
+            color: #FBBF24;
+        }
+
+        .meta {
+            margin-top: 60px;
+            font-size: 0.95rem;
+            color: #4A5060;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .comp {
+            display: flex;
+            gap: 24px;
+            margin: 48px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .comp-item {
+            padding: 40px 48px;
+            text-align: center;
+            background: #12141A;
+            min-width: 200px;
+            border: 1px solid #252830;
+        }
+
+        .comp-item.on {
+            background: #1428A0;
+            border-color: #4A8CFF;
+        }
+
+        .comp-item .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            color: #5A6070;
+        }
+
+        .comp-item.on .tag {
+            color: #8AB8FF;
+        }
+
+        .comp-item p {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .list {
+            list-style: none;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .list li {
+            font-size: 1.15rem;
+            padding: 20px 0;
+            border-bottom: 1px solid #252830;
+            color: #A0A8B8;
+            font-weight: 400;
+        }
+
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .list strong {
+            color: #F0F0F5;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .grid-item {
+            padding: 28px 32px;
+            text-align: center;
+            background: #12141A;
+            min-width: 150px;
+            border: 1px solid #252830;
+            border-radius: 8px;
+        }
+
+        .grid-item .name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .grid-item .desc {
+            font-size: 0.9rem;
+            color: #6A7080;
+            font-weight: 300;
+        }
+
+        .code {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 28px 32px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 800px;
+            width: 90%;
+            margin: 32px 0;
+            white-space: pre-wrap;
+            color: #A0A8B8;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .code .comment {
+            color: #5A6070;
+        }
+
+        .code .keyword {
+            color: #C4B5FD;
+        }
+
+        .code .string {
+            color: #6EE7B7;
+        }
+
+        .tbl {
+            margin-top: 36px;
+            border-collapse: collapse;
+        }
+
+        .tbl th,
+        .tbl td {
+            padding: 16px 24px;
+            text-align: left;
+            border-bottom: 1px solid #252830;
+        }
+
+        .tbl th {
+            color: #5A6070;
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .tbl td {
+            font-size: 0.95rem;
+            color: #A0A8B8;
+        }
+
+        .quote-box {
+            background: #12141A;
+            border-left: 3px solid #4A8CFF;
+            padding: 24px 28px;
+            margin: 32px 0;
+            max-width: 650px;
+        }
+
+        .quote-box p {
+            font-size: 1.05rem;
+            color: #A0A8B8;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .warn {
+            background: #14161A;
+            border-left: 2px solid #F59E0B;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .warn p {
+            color: #F59E0B;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .tip {
+            background: #14161A;
+            border-left: 2px solid #10B981;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .tip p {
+            color: #10B981;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pipeline-step {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .pipeline-step.on {
+            background: #1428A0;
+            border-color: #4A8CFF;
+        }
+
+        .pipeline-arrow {
+            color: #3A4050;
+            font-size: 1.2rem;
+        }
+
+        .page-num {
+            position: fixed;
+            bottom: 32px;
+            right: 48px;
+            font-size: 0.85rem;
+            color: #3A4050;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 32px;
+            left: 48px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav button {
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: 1px solid #252830;
+            color: #5A6070;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav button:hover {
+            border-color: #4A8CFF;
+            color: #4A8CFF;
+        }
+
+        .part-label {
+            position: fixed;
+            top: 32px;
+            left: 48px;
+            font-size: 0.75rem;
+            color: #3A4050;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 48px 28px;
+            }
+
+            .comp {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .comp-item {
+                min-width: auto;
+                padding: 28px 24px;
+            }
+
+            .grid {
+                flex-direction: column;
+            }
+
+            .nav {
+                left: 24px;
+                bottom: 24px;
+            }
+
+            .page-num {
+                right: 24px;
+                bottom: 24px;
+            }
+
+            .pipeline {
+                gap: 8px;
+            }
+
+            .pipeline-step {
+                padding: 12px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="part-label">Day 2-2 · 파이프라인 & TDD</div>
+
+    <div class="slides" id="slides">
+
+        <!-- ==================== Part 3: 파이프라인 설계 ==================== -->
+
+        <!-- 01. Cover -->
+        <div class="slide violet">
+            <h1>파이프라인<br>설계</h1>
+            <p class="sub">반복 가능한 워크플로우 구축</p>
+        </div>
+
+        <!-- 02. Pipeline Concept -->
+        <div class="slide surface">
+            <h2>파이프라인을 구축하자</h2>
+            <div class="pipeline">
+                <div class="pipeline-step">요구사항 분석</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">PRD 작성</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">TDD 개발</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">코드 리뷰</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step on">검증</div>
+            </div>
+            <p class="sub">각 단계에 AI 역할을 부여</p>
+        </div>
+
+        <!-- 02-1. Pipeline Image -->
+        <div class="slide surface">
+            <img src="2-2day.png" alt="AI Pipeline & TDD"
+                style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <p class="sub">자동화된 검증과 피드백 루프: AI 파이프라인</p>
+        </div>
+
+        <!-- 03. Why Pipeline -->
+        <div class="slide">
+            <h3>왜 파이프라인인가</h3>
+            <ul class="list">
+                <li><strong>반복 가능</strong> — 매번 같은 품질 보장</li>
+                <li><strong>검증 포인트</strong> — 각 단계에서 확인</li>
+                <li><strong>실패 시 복구</strong> — 어디서 문제인지 명확</li>
+                <li><strong class="em">자동화 가능</strong> — 워크플로우로 패키징</li>
+            </ul>
+        </div>
+
+        <!-- 04. Role Assignment -->
+        <div class="slide surface">
+            <h3>AI에게 역할 부여하기</h3>
+            <div class="code"><span class="string">"너는 시니어 요구사항 분석가야. 스펙의 핵심을 정리해줘."</span>
+
+                <span class="string">"너는 PRD 작성 전문가야. 요구사항 기반으로 문서 작성해줘."</span>
+
+                <span class="string">"너는 TDD의 달인이야. 테스트 먼저 작성하고 구현해줘."</span>
+
+                <span class="string">"너는 코드리뷰의 화신이야. MISRA C 기준으로 검토해줘."</span>
+            </div>
+            <p class="sub">같은 AI도 역할에 따라 다른 관점으로 작업</p>
+        </div>
+
+        <!-- 05. Multi-Agent Concept -->
+        <div class="slide">
+            <h2>Multi-Agent 패턴</h2>
+            <p class="sub" style="margin-bottom: 32px;">하나의 AI가 아니라 여러 역할로 분리</p>
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="name em">분석가</p>
+                    <p class="desc">요구사항 추출</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">설계자</p>
+                    <p class="desc">아키텍처 설계</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">개발자</p>
+                    <p class="desc">코드 구현</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name red">검증자</p>
+                    <p class="desc">품질 검사</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 06. Loopback -->
+        <div class="slide surface">
+            <h2>루프백 워크플로우</h2>
+            <p class="sub" style="margin-bottom: 32px;">실패하면 앞으로 돌아가기</p>
+            <div class="code">"요구사항 분석 → PRD 문서 생성 → TDD 개발 → 테스트 → 코드리뷰
+
+                이 파이프라인이 <span class="string">루프백 방식</span>으로 동작하도록 해줘.
+                테스트 실패하면 TDD로 돌아가고,
+                코드리뷰에서 문제 발견되면 해당 단계로 돌아가게."</div>
+        </div>
+
+        <!-- 07. Loopback Diagram -->
+        <div class="slide">
+            <h3>루프백 흐름도</h3>
+            <img src="loopback-workflow.png" alt="Loopback Workflow"
+                style="max-width: 450px; margin: 24px 0; border-radius: 8px;">
+            <p class="sub">무한 루프 방지를 위해 최대 반복 횟수 설정 권장</p>
+        </div>
+
+        <!-- 08. Max Loop -->
+        <div class="slide surface">
+            <h3>무한 루프 방지</h3>
+            <div class="code"><span class="comment"># 프롬프트 예시</span>
+                "루프백으로 동작하되, 각 단계 <span class="keyword">최대 3회</span>까지만 재시도해.
+                3회 넘어가면 사람에게 에스컬레이션해."
+
+                <span class="comment"># 구현 방식</span>
+                - max_retry: 3
+                - on_max_retry: "escalate_to_human"
+            </div>
+            <div class="warn">
+                <p>무한 루프 방지 없이 자동화하면 토큰비 폭탄</p>
+            </div>
+        </div>
+
+        <!-- 09. Tools Integration -->
+        <div class="slide">
+            <h3>파이프라인에 도구 연결</h3>
+            <div class="code"><span class="comment"># 요구사항 분석 단계</span>
+                "Context7 MCP를 활용해서 라이브러리 문서 참조해"
+                "스펙 문서 /docs/spec_v2.md 를 확인해"
+
+                <span class="comment"># TDD 개발 단계</span>
+                "TDD에 대해서 1분 이상 고민하고 시작해"
+                "우리 회사 코드 컨벤션 /docs/coding_rule.md 참조해"
+
+                <span class="comment"># 코드 리뷰 단계</span>
+                "MISRA C 2012 기준으로 검토해"
+                "보안 취약점 위주로 확인해"
+            </div>
+        </div>
+
+        <!-- 10. Verification Phase -->
+        <div class="slide surface">
+            <h3>검증 단계의 중요성</h3>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">검증 없음</p>
+                    <p style="font-size:0.9rem">AI가 "완료"라고 하면<br>그대로 믿음</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">검증 있음</p>
+                    <p style="font-size:0.85rem">요구사항 매칭 체크<br>테스트 커버리지 확인<br>코드 품질 검사</p>
+                </div>
+            </div>
+            <p class="sub">검증 없는 자동화는 자동화된 버그 생산</p>
+        </div>
+
+        <!-- ==================== Part 4: TDD 실습 ==================== -->
+
+        <!-- 11. Section Title -->
+        <div class="slide orange">
+            <h1>TDD 실습</h1>
+            <p class="sub">AI와 함께하는 테스트 주도 개발</p>
+        </div>
+
+        <!-- 12. Why TDD with AI -->
+        <div class="slide surface">
+            <h2>왜 AI에게 TDD가 좋은가</h2>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">인간</p>
+                    <p>"나중에 테스트..."</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">AI</p>
+                    <p>귀찮다는 개념 없음<br>정교하게, 일관되게</p>
+                </div>
+            </div>
+            <p class="sub">TDD는 AI에게 시키기 최적의 작업</p>
+        </div>
+
+        <!-- 13. Kent Beck -->
+        <div class="slide">
+            <h2>켄트 벡이<br>다시 강연 다니는 이유</h2>
+            <p class="sub" style="margin-top: 48px;">
+                TDD 창시자가 AI 시대에 TDD를 다시 강조<br><br>
+                <span class="em">"AI가 테스트를 완벽하게 만들어주니까<br>TDD가 드디어 실용적이 됐다"</span>
+            </p>
+        </div>
+
+        <!-- 14. TDD Cycle -->
+        <div class="slide surface">
+            <h3>TDD 사이클: Red-Green-Refactor</h3>
+            <div class="pipeline">
+                <div class="pipeline-step" style="background: #7F1D1D; border-color: #F87171;">Red<br><small>테스트
+                        실패</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" style="background: #064E3B; border-color: #10B981;">Green<br><small>테스트
+                        통과</small></div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step" style="background: #1E3A5F; border-color: #4A8CFF;">Refactor<br><small>코드
+                        개선</small></div>
+            </div>
+            <p class="sub">이 사이클을 AI와 함께 반복</p>
+        </div>
+
+        <!-- 15. TDD Prompt -->
+        <div class="slide">
+            <h3>TDD 프롬프트 패턴</h3>
+            <div class="code"><span class="comment"># Step 1: 테스트 먼저 (Red)</span>
+                <span class="string">"wear_leveling_select_victim 함수의 테스트 케이스를
+                    먼저 작성해줘. 구현은 하지 마."</span>
+
+                <span class="comment"># Step 2: 최소 구현 (Green)</span>
+                <span class="string">"이 테스트들이 통과하도록 최소한으로 구현해줘."</span>
+
+                <span class="comment"># Step 3: 리팩토링 (Refactor)</span>
+                <span class="string">"테스트는 유지하면서 코드 품질을 개선해줘."</span>
+            </div>
+        </div>
+
+        <!-- 16. TDD Example -->
+        <div class="slide surface">
+            <h3>TDD 실습 예시</h3>
+            <div class="code"><span class="comment"># Step 1: 테스트 먼저 작성 (Red)</span>
+                > wear_leveling_select_victim 함수에 대한 테스트 케이스 먼저 작성해줘.
+                - 정상 케이스: erase count가 가장 낮은 블록 선택
+                - 엣지 케이스: 모든 블록 erase count 동일
+                - 에러 케이스: 선택 가능한 블록 없음
+
+                <span class="comment"># Step 2: 최소 구현 (Green)</span>
+                > 이 테스트들이 통과하도록 최소한으로 구현해줘.
+
+                <span class="comment"># Step 3: 리팩토링 (Refactor)</span>
+                > 코드 품질 개선해줘. 가독성, 성능 위주로.
+            </div>
+        </div>
+
+        <!-- 17. Test Case Types -->
+        <div class="slide">
+            <h3>테스트 케이스 유형</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="name green">정상 케이스</p>
+                    <p class="desc">Happy path</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name yellow">엣지 케이스</p>
+                    <p class="desc">경계값, 빈 값</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name red">에러 케이스</p>
+                    <p class="desc">잘못된 입력</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name em">성능 케이스</p>
+                    <p class="desc">대용량 데이터</p>
+                </div>
+            </div>
+            <p class="sub">AI에게 "이 4가지 유형 모두 작성해줘"라고 요청</p>
+        </div>
+
+        <!-- 18. Coverage -->
+        <div class="slide surface">
+            <h3>커버리지 목표 설정</h3>
+            <div class="code"><span class="comment"># CLAUDE.md에 추가</span>
+                ## 테스트 요구사항
+                - 단위 테스트 커버리지: <span class="keyword">80% 이상</span>
+                - 브랜치 커버리지: <span class="keyword">70% 이상</span>
+                - 에러 핸들링 경로: <span class="keyword">100%</span>
+
+                <span class="comment"># 프롬프트</span>
+                <span class="string">"이 함수의 테스트 커버리지가 80%가 되도록
+                    테스트 케이스를 추가해줘."</span>
+            </div>
+        </div>
+
+        <!-- 19. TDD Practice -->
+        <div class="slide orange">
+            <h1>실습 시간</h1>
+            <p class="sub">담당 모듈에서 함수 하나 선택해서 TDD</p>
+        </div>
+
+        <!-- 20. TDD Practice Steps -->
+        <div class="slide surface">
+            <h2>실습 단계</h2>
+            <ul class="list">
+                <li><strong>Step 1</strong> — 테스트할 함수 선정 (담당 모듈에서)</li>
+                <li><strong>Step 2</strong> — "테스트 케이스 먼저 작성해줘" 요청</li>
+                <li><strong>Step 3</strong> — 테스트 실행 → 실패 확인 (Red)</li>
+                <li><strong>Step 4</strong> — "테스트 통과하도록 구현해줘" 요청</li>
+                <li><strong>Step 5</strong> — 테스트 실행 → 성공 확인 (Green)</li>
+                <li><strong>Step 6</strong> — "리팩토링해줘" 요청 (Refactor)</li>
+            </ul>
+        </div>
+
+        <!-- ==================== Part 5: 마무리 ==================== -->
+
+        <!-- 21. Summary -->
+        <div class="slide">
+            <h2>Day 2 핵심 정리</h2>
+            <ul class="list">
+                <li><strong class="em">Context Engineering</strong> — 맥락이 품질을 결정</li>
+                <li><strong>CLAUDE.md</strong> — 프로젝트 맥락 파일 작성</li>
+                <li><strong>Rule-Growing</strong> — 코드와 룰이 함께 진화</li>
+                <li><strong>파이프라인</strong> — 반복 가능한 워크플로우</li>
+                <li><strong>TDD</strong> — AI와 함께하는 테스트 주도 개발</li>
+            </ul>
+        </div>
+
+        <!-- 22. Tomorrow Preview -->
+        <div class="slide surface">
+            <h2>내일 예습</h2>
+            <ul class="list">
+                <li><strong>Skills</strong> — 재사용 가능한 워크플로우 패키지</li>
+                <li><strong>MCP</strong> — 외부 도구 연결</li>
+                <li><strong>Hooks</strong> — 자동 동작 트리거</li>
+                <li><strong>Agent Factory</strong> — 나만의 워크플로우 구축</li>
+            </ul>
+        </div>
+
+        <!-- 23. Homework -->
+        <div class="slide">
+            <h2>오늘의 과제</h2>
+            <ul class="list">
+                <li>☐ 담당 모듈용 CLAUDE.md 작성 완료</li>
+                <li>☐ 팀원과 CLAUDE.md 리뷰</li>
+                <li>☐ TDD로 함수 하나 구현해보기</li>
+                <li>☐ Rule-Growing: 발견한 문제 CLAUDE.md에 추가</li>
+            </ul>
+        </div>
+
+        <!-- 24. QA -->
+        <div class="slide blue">
+            <h1>Q&A</h1>
+            <p class="sub">감사합니다</p>
+            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J</p>
+        </div>
+
+    </div>
+
+    <div class="page-num"><span id="current">1</span> / <span id="total">24</span></div>
+    <div class="nav">
+        <button onclick="prev()">←</button>
+        <button onclick="next()">→</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        let current = 0;
+        document.getElementById('total').textContent = total;
+        function goTo(index) {
+            if (index < 0) index = 0;
+            if (index >= total) index = total - 1;
+            current = index;
+            document.getElementById('slides').style.transform = `translateX(-${current * 100}vw)`;
+            document.getElementById('current').textContent = current + 1;
+        }
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+            else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
+        });
+    </script>
+
+</body>
+
+</html>

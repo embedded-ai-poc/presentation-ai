@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 페어프로그래밍 - Day 3-1: Agentic Workflow 개념 & Skills</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #0A0A0F;
+            color: #F0F0F5;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+        }
+
+        .slide {
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            background: #0A0A0F;
+        }
+
+        .slide.blue {
+            background: linear-gradient(135deg, #0D1B3E 0%, #1428A0 100%);
+        }
+
+        .slide.surface {
+            background: #0F1015;
+        }
+
+        .slide.mint {
+            background: linear-gradient(135deg, #064E3B 0%, #10B981 100%);
+        }
+
+        .slide.orange {
+            background: linear-gradient(135deg, #7C2D12 0%, #EA580C 100%);
+        }
+
+        .slide.violet {
+            background: linear-gradient(135deg, #3B0764 0%, #7C3AED 100%);
+        }
+
+        .slide.mint .sub,
+        .slide.orange .sub,
+        .slide.violet .sub,
+        .slide.blue .sub {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .slide.mint .em {
+            color: #6EE7B7;
+        }
+
+        .slide.orange .em {
+            color: #FED7AA;
+        }
+
+        .slide.violet .em {
+            color: #C4B5FD;
+        }
+
+        .slide.blue .em {
+            color: #8AB8FF;
+        }
+
+        h1 {
+            font-size: clamp(2.8rem, 7vw, 5.5rem);
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h3 {
+            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .sub {
+            font-size: clamp(1.05rem, 2vw, 1.3rem);
+            color: #8890A0;
+            margin-top: 32px;
+            text-align: center;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .em {
+            color: #4A8CFF;
+        }
+
+        .red {
+            color: #F87171;
+        }
+
+        .green {
+            color: #10B981;
+        }
+
+        .yellow {
+            color: #FBBF24;
+        }
+
+        .meta {
+            margin-top: 60px;
+            font-size: 0.95rem;
+            color: #4A5060;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        .comp {
+            display: flex;
+            gap: 24px;
+            margin: 48px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .comp-item {
+            padding: 40px 48px;
+            text-align: center;
+            background: #12141A;
+            min-width: 200px;
+            border: 1px solid #252830;
+        }
+
+        .comp-item.on {
+            background: #1428A0;
+            border-color: #4A8CFF;
+        }
+
+        .comp-item .tag {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            color: #5A6070;
+        }
+
+        .comp-item.on .tag {
+            color: #8AB8FF;
+        }
+
+        .comp-item p {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .list {
+            list-style: none;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        .list li {
+            font-size: 1.15rem;
+            padding: 20px 0;
+            border-bottom: 1px solid #252830;
+            color: #A0A8B8;
+            font-weight: 400;
+        }
+
+        .list li:last-child {
+            border-bottom: none;
+        }
+
+        .list strong {
+            color: #F0F0F5;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: flex;
+            gap: 16px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .grid-item {
+            padding: 28px 32px;
+            text-align: center;
+            background: #12141A;
+            min-width: 150px;
+            border: 1px solid #252830;
+            border-radius: 8px;
+        }
+
+        .grid-item .name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .grid-item .desc {
+            font-size: 0.9rem;
+            color: #6A7080;
+            font-weight: 300;
+        }
+
+        .code {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 28px 32px;
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            max-width: 800px;
+            width: 90%;
+            margin: 32px 0;
+            white-space: pre-wrap;
+            color: #A0A8B8;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .code .comment {
+            color: #5A6070;
+        }
+
+        .code .keyword {
+            color: #C4B5FD;
+        }
+
+        .code .string {
+            color: #6EE7B7;
+        }
+
+        .quote-box {
+            background: #12141A;
+            border-left: 3px solid #4A8CFF;
+            padding: 24px 28px;
+            margin: 32px 0;
+            max-width: 650px;
+        }
+
+        .quote-box p {
+            font-size: 1.05rem;
+            color: #A0A8B8;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .warn {
+            background: #14161A;
+            border-left: 2px solid #F59E0B;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .warn p {
+            color: #F59E0B;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .tip {
+            background: #14161A;
+            border-left: 2px solid #10B981;
+            padding: 20px 28px;
+            margin-top: 36px;
+            max-width: 600px;
+        }
+
+        .tip p {
+            color: #10B981;
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .pipeline {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .pipeline-step {
+            background: #12141A;
+            border: 1px solid #252830;
+            padding: 16px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .pipeline-step.on {
+            background: #1428A0;
+            border-color: #4A8CFF;
+        }
+
+        .pipeline-arrow {
+            color: #3A4050;
+            font-size: 1.2rem;
+        }
+
+        .page-num {
+            position: fixed;
+            bottom: 32px;
+            right: 48px;
+            font-size: 0.85rem;
+            color: #3A4050;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .nav {
+            position: fixed;
+            bottom: 32px;
+            left: 48px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav button {
+            width: 44px;
+            height: 44px;
+            background: transparent;
+            border: 1px solid #252830;
+            color: #5A6070;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav button:hover {
+            border-color: #4A8CFF;
+            color: #4A8CFF;
+        }
+
+        .part-label {
+            position: fixed;
+            top: 32px;
+            left: 48px;
+            font-size: 0.75rem;
+            color: #3A4050;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 48px 28px;
+            }
+
+            .comp {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .comp-item {
+                min-width: auto;
+                padding: 28px 24px;
+            }
+
+            .grid {
+                flex-direction: column;
+            }
+
+            .nav {
+                left: 24px;
+                bottom: 24px;
+            }
+
+            .page-num {
+                right: 24px;
+                bottom: 24px;
+            }
+
+            .pipeline {
+                gap: 8px;
+            }
+
+            .pipeline-step {
+                padding: 12px 14px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="part-label">Day 3-1 · Agentic Workflow & Skills</div>
+
+    <div class="slides" id="slides">
+
+        <!-- 01. Cover -->
+        <div class="slide blue">
+            <h1>AI 페어프로그래밍</h1>
+            <p class="sub">Day 3-1: Agentic Workflow 개념 & Skills</p>
+            <p class="meta" style="color: rgba(255,255,255,0.4);">김학민 · SE P/J · 2025.12</p>
+        </div>
+
+        <!-- 02. Day 2 Recap -->
+        <div class="slide surface">
+            <h2>Day 2 리캡</h2>
+            <ul class="list">
+                <li><strong class="em">Context Engineering</strong> — 맥락이 품질을 결정</li>
+                <li><strong>CLAUDE.md</strong> — 프로젝트 맥락 파일</li>
+                <li><strong>Rule-Growing</strong> — 룰이 점점 정교해짐</li>
+                <li><strong>파이프라인 & TDD</strong> — 반복 가능한 개발</li>
+            </ul>
+        </div>
+
+        <!-- 03. Today's Goal -->
+        <div class="slide">
+            <h2>오늘의 목표</h2>
+            <p class="sub" style="font-size: 1.4rem;">
+                <span class="em">나만의 Agent Factory 구축</span>
+            </p>
+            <p class="sub" style="margin-top: 48px; font-size: 1rem; opacity: 0.7;">
+                Agentic Workflow의 철학 이해<br>
+                Skills, Commands, Hooks 활용<br>
+                MCP로 외부 도구 연결
+            </p>
+        </div>
+
+        <!-- 03-1. Agentic Workflow Image -->
+        <div class="slide surface">
+            <img src="3-1day.png" alt="Agentic Workflow & Skills"
+                style="max-width: 500px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <p class="sub">자율적인 AI 에이전트 팀과 나만의 워크플로우 팩토리</p>
+        </div>
+
+        <!-- ==================== Part 1: Agentic Workflow 개념 ==================== -->
+
+        <!-- 04. Section Title -->
+        <div class="slide violet">
+            <h1>Agentic<br>Workflow</h1>
+            <p class="sub">AI를 단순 도구가 아닌<br><span class="em">자율적 협업자</span>로 활용</p>
+        </div>
+
+        <!-- 05. What is Agentic -->
+        <div class="slide surface">
+            <h2>Agentic이란</h2>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">Traditional</p>
+                    <p style="font-size:0.9rem">질문 → 답변<br>1회성 상호작용<br>수동적</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">Agentic</p>
+                    <p style="font-size:0.9rem">목표 → 자율 실행<br>다단계 추론<br>능동적</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 06. Why Workflow Matters -->
+        <div class="slide">
+            <h2>워크플로우가 핵심이다</h2>
+            <p class="sub" style="margin-bottom: 32px;">
+                AI 모델은 누구나 같은 걸 쓴다<br>
+                <span class="em">차별화는 워크플로우에서 나온다</span>
+            </p>
+            <div class="quote-box">
+                <p>"좋은 워크플로우를 구축하려면<br>개인화된 방식을 스스로 깨우치고 학습하는 게 중요하다"</p>
+            </div>
+        </div>
+
+        <!-- 07. Personalization Philosophy -->
+        <div class="slide surface">
+            <h3>개인화 철학</h3>
+            <ul class="list">
+                <li><strong class="red">남의 워크플로우 복사</strong> — 맥락이 다르면 효과 없음</li>
+                <li><strong class="yellow">패턴 학습</strong> — 다른 사람의 접근법 참고</li>
+                <li><strong class="green">자신만의 구축</strong> — 내 업무에 맞게 커스터마이징</li>
+            </ul>
+            <p class="sub">오늘은 패턴을 배우고, 내 것으로 만드는 시간</p>
+        </div>
+
+        <!-- 08. Extension System -->
+        <div class="slide">
+            <h3>Claude Code 확장 시스템</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="name em">Skills</p>
+                    <p class="desc">워크플로우 패키지</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">Commands</p>
+                    <p class="desc">슬래시 명령어</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">Hooks</p>
+                    <p class="desc">자동 트리거</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">MCP</p>
+                    <p class="desc">외부 도구 연결</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 09. Workflow Patterns -->
+        <div class="slide surface">
+            <h3>워크플로우 패턴 3가지</h3>
+            <ul class="list">
+                <li><strong class="em">검증 루프</strong> — 요구사항/설계/코드 각 단계 검증</li>
+                <li><strong>병렬 에이전트</strong> — 여러 관점에서 동시 분석</li>
+                <li><strong>루프백 & 에스컬레이션</strong> — 실패시 재시도, 한계시 사람에게</li>
+            </ul>
+        </div>
+
+        <!-- ==================== Part 2: Skills ==================== -->
+
+        <!-- 10. Skills Section -->
+        <div class="slide mint">
+            <h1>Skills</h1>
+            <p class="sub">워크플로우를 패키지로 만들기<br><br><span class="em">/명령어</span> 하나로 복잡한 작업 실행</p>
+        </div>
+
+        <!-- 11. What is Skill -->
+        <div class="slide surface">
+            <h2>Skill이란</h2>
+            <div class="comp">
+                <div class="comp-item">
+                    <p class="tag">Before</p>
+                    <p style="font-size:0.85rem">매번 긴 프롬프트 입력<br>반복되는 설명<br>일관성 없음</p>
+                </div>
+                <div class="comp-item on">
+                    <p class="tag">After</p>
+                    <p style="font-size:0.9rem">/my-workflow<br>한 번에 실행<br>항상 동일</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Skill Structure -->
+        <div class="slide">
+            <h3>Skill 폴더 구조</h3>
+            <div class="code">~/.claude/skills/my-workflow/
+                ├── <span class="keyword">SKILL.md</span> # 스킬 정의 (필수)
+                ├── templates/ # 템플릿 파일들
+                │ └── prd.md
+                ├── prompts/ # 프롬프트 모음
+                │ └── analysis.md
+                └── examples/ # 예시 파일들</div>
+            <p class="sub">SKILL.md만 있으면 스킬로 인식됩니다</p>
+        </div>
+
+        <!-- 13. SKILL.md -->
+        <div class="slide surface">
+            <h3>SKILL.md 기본 구조</h3>
+            <div class="code"><span class="keyword">---</span>
+                <span class="keyword">name:</span> my-workflow
+                <span class="keyword">description:</span> 코드 리뷰 자동화 워크플로우
+                <span class="keyword">triggers:</span>
+                - /review
+                - /코드리뷰
+                <span class="keyword">---</span>
+
+                # 코드 리뷰 워크플로우
+
+                ## 실행 단계
+                1. 변경된 파일 목록 확인
+                2. 각 파일 코드 리뷰
+                3. 리뷰 결과 정리
+            </div>
+        </div>
+
+        <!-- 14. Skill Example -->
+        <div class="slide">
+            <h3>실제 Skill 예시: 코드리뷰</h3>
+            <div class="code"><span class="keyword">---</span>
+                name: code-review
+                description: MISRA C 기준 코드 리뷰
+                triggers: [/review, /리뷰]
+                <span class="keyword">---</span>
+
+                # 코드 리뷰 워크플로우
+
+                ## 검토 기준
+                - MISRA C 2012 위반 사항
+                - 메모리 누수 가능성
+                - NULL 포인터 체크 누락
+
+                ## 출력 형식
+                | 파일 | 라인 | 심각도 | 내용 |
+            </div>
+        </div>
+
+        <!-- 15. Skill Invocation -->
+        <div class="slide surface">
+            <h2>Skill 실행하기</h2>
+            <div class="code"><span class="comment"># 터미널에서</span>
+                $ claude
+
+                <span class="comment"># Claude Code 내에서</span>
+                > /review src/gc_module.c
+
+                <span class="comment"># 결과</span>
+                SKILL.md의 워크플로우대로 자동 실행
+            </div>
+            <p class="sub">슬래시 명령어로 간단하게 실행</p>
+        </div>
+
+        <!-- ==================== Part 3: Commands & Hooks ==================== -->
+
+        <!-- 16. Commands Section -->
+        <div class="slide orange">
+            <h1>Commands<br>& Hooks</h1>
+            <p class="sub">자동화의 핵심 요소</p>
+        </div>
+
+        <!-- 17. Commands -->
+        <div class="slide surface">
+            <h3>Commands: 커스텀 명령어</h3>
+            <div class="code"><span class="comment"># settings.json</span>
+                {
+                "<span class="keyword">customCommands</span>": {
+                "/build": "make -j8 TARGET=release",
+                "/test": "make test SUITE=unit",
+                "/lint": "cppcheck --enable=all src/"
+                }
+                }</div>
+            <p class="sub">자주 쓰는 명령어를 단축키처럼 등록</p>
+        </div>
+
+        <!-- 18. Hooks Concept -->
+        <div class="slide">
+            <h2>Hooks: 자동 트리거</h2>
+            <div class="pipeline">
+                <div class="pipeline-step">이벤트 발생</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step on">Hook 실행</div>
+                <span class="pipeline-arrow">→</span>
+                <div class="pipeline-step">자동 동작</div>
+            </div>
+            <p class="sub">특정 이벤트에 자동으로 반응</p>
+        </div>
+
+        <!-- 19. Hook Types -->
+        <div class="slide surface">
+            <h3>Hook 종류</h3>
+            <div class="grid">
+                <div class="grid-item">
+                    <p class="name em">PreToolUse</p>
+                    <p class="desc">도구 실행 전</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">PostToolUse</p>
+                    <p class="desc">도구 실행 후</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">Stop</p>
+                    <p class="desc">세션 종료 시</p>
+                </div>
+                <div class="grid-item">
+                    <p class="name">SubagentStop</p>
+                    <p class="desc">서브에이전트 종료</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 20. Hook Example -->
+        <div class="slide">
+            <h3>Hook 설정 예시</h3>
+            <div class="code"><span class="comment"># settings.local.json</span>
+                {
+                "<span class="keyword">hooks</span>": {
+                "PostToolUse": [{
+                "matcher": "Write",
+                "hooks": [{
+                "type": "command",
+                "command": "make lint"
+                }]
+                }]
+                }
+                }</div>
+            <p class="sub">파일 저장 후 자동으로 lint 실행</p>
+        </div>
+
+        <!-- 21. Hook Use Cases -->
+        <div class="slide surface">
+            <h3>Hook 활용 사례</h3>
+            <ul class="list">
+                <li><strong>코드 작성 후</strong> — 자동 포맷팅, lint 실행</li>
+                <li><strong>테스트 실행 후</strong> — 커버리지 리포트 생성</li>
+                <li><strong>세션 종료 시</strong> — 작업 로그 저장</li>
+                <li><strong class="em">서브에이전트 종료</strong> — 결과 집계, 다음 단계 트리거</li>
+            </ul>
+        </div>
+
+        <!-- 22. Practice -->
+        <div class="slide orange">
+            <h1>실습</h1>
+            <p class="sub">나만의 첫 번째 Skill 만들기</p>
+        </div>
+
+        <!-- 23. Practice Steps -->
+        <div class="slide surface">
+            <h3>Skill 만들기 실습</h3>
+            <ul class="list">
+                <li><strong>Step 1</strong> — ~/.claude/skills/my-first/ 폴더 생성</li>
+                <li><strong>Step 2</strong> — SKILL.md 작성 (이름, 설명, 트리거)</li>
+                <li><strong>Step 3</strong> — 워크플로우 단계 정의</li>
+                <li><strong>Step 4</strong> — /my-first 로 테스트</li>
+            </ul>
+        </div>
+
+        <!-- 24. Summary -->
+        <div class="slide">
+            <h2>Part 1 핵심 정리</h2>
+            <ul class="list">
+                <li><strong class="em">Agentic Workflow</strong> — 자율적 협업자로서의 AI</li>
+                <li><strong>개인화</strong> — 패턴을 배우고 내 것으로 만들기</li>
+                <li><strong>Skills</strong> — 워크플로우를 /명령어로 패키징</li>
+                <li><strong>Hooks</strong> — 이벤트 기반 자동 트리거</li>
+            </ul>
+        </div>
+
+        <!-- 25. Break -->
+        <div class="slide blue">
+            <h1>점심 시간</h1>
+            <p class="sub">오후: MCP 연동 & 나만의 워크플로우 설계</p>
+        </div>
+
+    </div>
+
+    <div class="page-num"><span id="current">1</span> / <span id="total">25</span></div>
+    <div class="nav">
+        <button onclick="prev()">←</button>
+        <button onclick="next()">→</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const total = slides.length;
+        let current = 0;
+        document.getElementById('total').textContent = total;
+        function goTo(index) {
+            if (index < 0) index = 0;
+            if (index >= total) index = total - 1;
+            current = index;
+            document.getElementById('slides').style.transform = `translateX(-${current * 100}vw)`;
+            document.getElementById('current').textContent = current + 1;
+        }
+        function next() { goTo(current + 1); }
+        function prev() { goTo(current - 1); }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+            else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+        });
+        let touchStartX = 0;
+        document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
+        document.addEventListener('touchend', e => {
+            const diff = touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 50) { if (diff > 0) next(); else prev(); }
+        });
+    </script>
+
+</body>
+
+</html>
