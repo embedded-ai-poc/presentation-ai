@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(ipconfig:*)",
+      "Bash(findstr:*)",
+      "Bash(python:*)",
+      "Bash(curl:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 워크샵 콘텐츠 대폭 확장 및 구조 개편\n\n- 1day.html 내용 개선\n- 2day.html, 3day.html 삭제 \\(통합 슬라이드로 대체\\)\n- ai-pair-programming.html 추가 \\(종합 슬라이드\\)\n- appendix-ontology/ 부록 슬라이드 추가\n- CLAUDE.md, presenter-guide.md 문서 추가\n- AI-Pair-Programming-Summary.md 요약 문서 추가\n- 2026-ai-trends.html, 2026-worldcup.html 추가\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
